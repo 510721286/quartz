@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:hsf="http://www.taobao.com/hsf"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+		 http://www.springframework.org/schema/beans/spring-beans.xsd
+		 http://www.springframework.org/schema/context
+       	 http://www.springframework.org/schema/context/spring-context-3.0.xsd
+		 http://www.springframework.org/schema/aop 
+  		 http://www.springframework.org/schema/aop/spring-aop-4.0.xsd
+  		 http://www.taobao.com/hsf
+  		 http://www.taobao.com/hsf/hsf.xsd"
+	default-autowire="byName">
+	
+	<!-- 扫描包路径 -->
+	 <context:component-scan base-package="com.njzhaomi" />
+	<!--  <context:component-scan base-package="com.njzhaomi.quartz.yuejia.*">
+		<context:exclude-filter type="annotation"
+			expression="org.springframework.stereotype.Service" />
+	</context:component-scan>  -->
+	
+	<beans profile="production">
+		<context:property-placeholder location="classpath:config/version_production.properties,classpath:config/config_production.properties" ignore-unresolvable="true" />  
+	</beans>
+	
+	<beans profile="test">
+		<context:property-placeholder location="classpath:config/version_test.properties,classpath:config/config_test.properties" ignore-unresolvable="true" />  
+	</beans>
+</beans>

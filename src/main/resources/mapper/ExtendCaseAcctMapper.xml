@@ -1,0 +1,327 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.njzhaomi.quartz.yuejia.dao.ExtendCaseAcctMapper" >
+  <resultMap id="BaseResultMap" type="com.njzhaomi.quartz.yuejia.povo.ExtendCaseAcct" >
+    <id column="id" property="id" jdbcType="DECIMAL" />
+    <result column="caseid" property="caseid" jdbcType="INTEGER" />
+    <result column="uid" property="uid" jdbcType="VARCHAR" />
+    <result column="point" property="point" jdbcType="INTEGER" />
+    <result column="readcnt" property="readcnt" jdbcType="INTEGER" />
+    <result column="sharecnt" property="sharecnt" jdbcType="INTEGER" />
+    <result column="joincnt" property="joincnt" jdbcType="INTEGER" />
+    <result column="upid" property="upid" jdbcType="VARCHAR" />
+    <result column="create_date" property="createDate" jdbcType="TIMESTAMP" />
+    <result column="entity" property="entity" jdbcType="VARCHAR" />
+    <result column="update_date" property="updateDate" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, caseid, uid, point, readcnt, sharecnt, joincnt, upid, create_date, entity, update_date
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.njzhaomi.quartz.yuejia.povo.ExtendCaseAcctExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from rru_extend_case_acct
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from rru_extend_case_acct
+    where id = #{id,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from rru_extend_case_acct
+    where id = #{id,jdbcType=DECIMAL}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.njzhaomi.quartz.yuejia.povo.ExtendCaseAcctExample" >
+    delete from rru_extend_case_acct
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.njzhaomi.quartz.yuejia.povo.ExtendCaseAcct" >
+    insert into rru_extend_case_acct (id, caseid, uid, 
+      point, readcnt, sharecnt, 
+      joincnt, upid, create_date, 
+      entity, update_date)
+    values (#{id,jdbcType=DECIMAL}, #{caseid,jdbcType=INTEGER}, #{uid,jdbcType=VARCHAR}, 
+      #{point,jdbcType=INTEGER}, #{readcnt,jdbcType=INTEGER}, #{sharecnt,jdbcType=INTEGER}, 
+      #{joincnt,jdbcType=INTEGER}, #{upid,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, 
+      #{entity,jdbcType=VARCHAR}, #{updateDate,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.njzhaomi.quartz.yuejia.povo.ExtendCaseAcct" >
+    insert into rru_extend_case_acct
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="caseid != null" >
+        caseid,
+      </if>
+      <if test="uid != null" >
+        uid,
+      </if>
+      <if test="point != null" >
+        point,
+      </if>
+      <if test="readcnt != null" >
+        readcnt,
+      </if>
+      <if test="sharecnt != null" >
+        sharecnt,
+      </if>
+      <if test="joincnt != null" >
+        joincnt,
+      </if>
+      <if test="upid != null" >
+        upid,
+      </if>
+      <if test="createDate != null" >
+        create_date,
+      </if>
+      <if test="entity != null" >
+        entity,
+      </if>
+      <if test="updateDate != null" >
+        update_date,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=DECIMAL},
+      </if>
+      <if test="caseid != null" >
+        #{caseid,jdbcType=INTEGER},
+      </if>
+      <if test="uid != null" >
+        #{uid,jdbcType=VARCHAR},
+      </if>
+      <if test="point != null" >
+        #{point,jdbcType=INTEGER},
+      </if>
+      <if test="readcnt != null" >
+        #{readcnt,jdbcType=INTEGER},
+      </if>
+      <if test="sharecnt != null" >
+        #{sharecnt,jdbcType=INTEGER},
+      </if>
+      <if test="joincnt != null" >
+        #{joincnt,jdbcType=INTEGER},
+      </if>
+      <if test="upid != null" >
+        #{upid,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null" >
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="entity != null" >
+        #{entity,jdbcType=VARCHAR},
+      </if>
+      <if test="updateDate != null" >
+        #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.njzhaomi.quartz.yuejia.povo.ExtendCaseAcctExample" resultType="java.lang.Integer" >
+    select count(*) from rru_extend_case_acct
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update rru_extend_case_acct
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=DECIMAL},
+      </if>
+      <if test="record.caseid != null" >
+        caseid = #{record.caseid,jdbcType=INTEGER},
+      </if>
+      <if test="record.uid != null" >
+        uid = #{record.uid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.point != null" >
+        point = #{record.point,jdbcType=INTEGER},
+      </if>
+      <if test="record.readcnt != null" >
+        readcnt = #{record.readcnt,jdbcType=INTEGER},
+      </if>
+      <if test="record.sharecnt != null" >
+        sharecnt = #{record.sharecnt,jdbcType=INTEGER},
+      </if>
+      <if test="record.joincnt != null" >
+        joincnt = #{record.joincnt,jdbcType=INTEGER},
+      </if>
+      <if test="record.upid != null" >
+        upid = #{record.upid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createDate != null" >
+        create_date = #{record.createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.entity != null" >
+        entity = #{record.entity,jdbcType=VARCHAR},
+      </if>
+      <if test="record.updateDate != null" >
+        update_date = #{record.updateDate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update rru_extend_case_acct
+    set id = #{record.id,jdbcType=DECIMAL},
+      caseid = #{record.caseid,jdbcType=INTEGER},
+      uid = #{record.uid,jdbcType=VARCHAR},
+      point = #{record.point,jdbcType=INTEGER},
+      readcnt = #{record.readcnt,jdbcType=INTEGER},
+      sharecnt = #{record.sharecnt,jdbcType=INTEGER},
+      joincnt = #{record.joincnt,jdbcType=INTEGER},
+      upid = #{record.upid,jdbcType=VARCHAR},
+      create_date = #{record.createDate,jdbcType=TIMESTAMP},
+      entity = #{record.entity,jdbcType=VARCHAR},
+      update_date = #{record.updateDate,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.njzhaomi.quartz.yuejia.povo.ExtendCaseAcct" >
+    update rru_extend_case_acct
+    <set >
+      <if test="caseid != null" >
+        caseid = #{caseid,jdbcType=INTEGER},
+      </if>
+      <if test="uid != null" >
+        uid = #{uid,jdbcType=VARCHAR},
+      </if>
+      <if test="point != null" >
+        point = #{point,jdbcType=INTEGER},
+      </if>
+      <if test="readcnt != null" >
+        readcnt = #{readcnt,jdbcType=INTEGER},
+      </if>
+      <if test="sharecnt != null" >
+        sharecnt = #{sharecnt,jdbcType=INTEGER},
+      </if>
+      <if test="joincnt != null" >
+        joincnt = #{joincnt,jdbcType=INTEGER},
+      </if>
+      <if test="upid != null" >
+        upid = #{upid,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null" >
+        create_date = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="entity != null" >
+        entity = #{entity,jdbcType=VARCHAR},
+      </if>
+      <if test="updateDate != null" >
+        update_date = #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.njzhaomi.quartz.yuejia.povo.ExtendCaseAcct" >
+    update rru_extend_case_acct
+    set caseid = #{caseid,jdbcType=INTEGER},
+      uid = #{uid,jdbcType=VARCHAR},
+      point = #{point,jdbcType=INTEGER},
+      readcnt = #{readcnt,jdbcType=INTEGER},
+      sharecnt = #{sharecnt,jdbcType=INTEGER},
+      joincnt = #{joincnt,jdbcType=INTEGER},
+      upid = #{upid,jdbcType=VARCHAR},
+      create_date = #{createDate,jdbcType=TIMESTAMP},
+      entity = #{entity,jdbcType=VARCHAR},
+      update_date = #{updateDate,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=DECIMAL}
+  </update>
+  
+  <select id="loadCont" resultType="map">
+  
+  select sum(sharecnt) sharecnt ,sum(readcnt)  readcnt from  rru_extend_case_acct  where caseid = #{caseid}
+  
+  </select>
+  
+  
+  <select id="loadSum" resultType="map">
+   SELECT
+	sum(sharecnt) sharecnt,
+	sum(readcnt) readcnt,
+	caseid,
+	entity
+	FROM
+	rru_extend_case_acct
+	WHERE
+	entity IS NOT NULL
+	GROUP BY
+	caseid,
+	entity
+  </select>
+</mapper>

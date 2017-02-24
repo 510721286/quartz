@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<!DOCTYPE generatorConfiguration 
+  PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN" 
+  "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+
+<generatorConfiguration>
+	<!-- ORACLE连接所需JAR包 请自行替换为自己本机的包路径 -->
+	<classPathEntry location="D:\maven\repository\mysql\mysql-connector-java\5.1.34\mysql-connector-java-5.1.34.jar" />
+	<context id="MysqlTables" targetRuntime="MyBatis3"
+		defaultModelType="flat">
+		<!--remove info 去除所有注释 -->
+		<commentGenerator>
+			<!--remove date info 去除 头注释 -->
+			<!-- <property name="suppressDate" value="true" /> -->
+			<!--remove all info 去除所有注释 -->
+			<property name="suppressAllComments" value="true" />
+		</commentGenerator>
+		<!--conn -->
+		<jdbcConnection driverClass="com.mysql.jdbc.Driver"
+			connectionURL="jdbc:mysql://172.16.114.172:3306/rru" userId="rru"
+			password="rru@!@#">
+		</jdbcConnection>
+		<!-- -->
+		<javaTypeResolver>
+			<property name="forceBigDecimals" value="false" />
+		</javaTypeResolver>
+		<!--domain 配置生成的model 类的路径 -->
+		<javaModelGenerator targetPackage="com.njzhaomi.quartz.yuejia.povo"
+			targetProject="quartz/src/main/java">
+			<property name="enableSubPackages" value="true" />
+			<property name="trimStrings" value="true" />
+		</javaModelGenerator>
+		<!--mapper.java 配置生成的mapper 类的路径 -->
+		<sqlMapGenerator targetPackage="mapper"
+			targetProject="quartz/src/main/resources">
+			<property name="enableSubPackages" value="true" />
+		</sqlMapGenerator>
+		<!--mapper.xml 配置生成的mapper.xml 文件路径 -->
+		<javaClientGenerator type="XMLMAPPER"
+			targetPackage="com.njzhaomi.quartz.yuejia.dao" targetProject="quartz/src/main/java">
+			<property name="enableSubPackages" value="true" />
+		</javaClientGenerator>
+		<!-- schema="medi " logistics/src/main/java -->
+
+		<table tableName="rru_case_commet" domainObjectName="CaseComment">
+			<property name="useActualColumnNames" value="false" />
+			<!-- <generatedKey column="ID"
+				sqlStatement="SELECT SEQ_SYS_INTERFACE_LOG_SH.NEXTVAL AS ID FROM DUAL"
+				identity="false" /> -->
+			<columnOverride column="ID" javaType="java.lang.Long"
+				jdbcType="DECIMAL" />
+		</table>
+		<!-- <table tableName="SYS_GYS_INBOUND" domainObjectName="SysGysInbound"> 
+			<property name="useActualColumnNames" value="false" /> <generatedKey column="ID" 
+			sqlStatement="SELECT SEQ_SYS_GYS_INBOUND.NEXTVAL AS ID FROM DUAL" identity="false" 
+			/> <columnOverride column="ID" javaType="java.lang.Long" jdbcType="DECIMAL" 
+			/> </table> <table tableName="SYS_PURCHASE_SELL_STOCK" domainObjectName="SysPurchaseSellStock"> 
+			<property name="useActualColumnNames" value="false" /> <generatedKey column="ID" 
+			sqlStatement="SELECT SYS_PURCHASE_SELL_STOCK.NEXTVAL AS ID FROM DUAL" identity="false" 
+			/> <columnOverride column="ID" javaType="java.lang.Long" jdbcType="DECIMAL" 
+			/> </table> <table tableName="SYS_WAREHOUSE_PLAT_CONFIG" domainObjectName="SysWarehousePlatConfig"> 
+			<property name="useActualColumnNames" value="false" /> <generatedKey column="ID" 
+			sqlStatement="SELECT SEQ_WH_PLAT_CONFIG.NEXTVAL AS ID FROM DUAL" identity="false" 
+			/> <columnOverride column="ID" javaType="java.lang.Long" jdbcType="DECIMAL" 
+			/> </table> <table tableName="SYS_INTERFACE_CONFIG" domainObjectName="SysInterfaceConfig"> 
+			<property name="useActualColumnNames" value="false" /> <generatedKey column="ID" 
+			sqlStatement="SELECT SEQ_SYS_INTERFACE_CONFIG.NEXTVAL AS ID FROM DUAL" identity="false" 
+			/> <columnOverride column="ID" javaType="java.lang.Long" jdbcType="DECIMAL" 
+			/> </table> <table tableName="SYS_INTERFACE_LOG" domainObjectName="SysInterfaceLog"> 
+			<property name="useActualColumnNames" value="false" /> <generatedKey column="ID" 
+			sqlStatement="SELECT SEQ_SYS_INTERFACE_LOG.NEXTVAL AS ID FROM DUAL" identity="false" 
+			/> <columnOverride column="ID" javaType="java.lang.Long" jdbcType="DECIMAL" 
+			/> </table> <table tableName="SYS_EXCEPTION_LOG" domainObjectName="SysExceptionLog"> 
+			<property name="useActualColumnNames" value="false" /> <generatedKey column="ID" 
+			sqlStatement="SELECT SEQ_SYS_INTERFACE_LOG.NEXTVAL AS ID FROM DUAL" identity="false" 
+			/> <columnOverride column="ID" javaType="java.lang.Long" jdbcType="DECIMAL" 
+			/> </table> <table tableName="SYS_FINANCIAL_REQUEST_LOG" domainObjectName="SysFinancialRequestLog"> 
+			<property name="useActualColumnNames" value="false" /> <generatedKey column="ID" 
+			sqlStatement="SELECT SEQ_SYS_FINANCIAL_REQUEST_LOG.NEXTVAL AS ID FROM DUAL" 
+			identity="false" /> <columnOverride column="ID" javaType="java.lang.Long" 
+			jdbcType="DECIMAL" /> </table> -->
+	</context>
+</generatorConfiguration>

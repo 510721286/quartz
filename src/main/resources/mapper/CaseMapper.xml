@@ -1,0 +1,870 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.njzhaomi.quartz.yuejia.dao.CaseMapper" >
+  <resultMap id="BaseResultMap" type="com.njzhaomi.quartz.yuejia.povo.Case" >
+    <id column="id" property="id" jdbcType="DECIMAL" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="product_name" property="productName" jdbcType="VARCHAR" />
+    <result column="desc" property="desc" jdbcType="VARCHAR" />
+    <result column="logo_pic" property="logoPic" jdbcType="VARCHAR" />
+    <result column="areaid" property="areaid" jdbcType="INTEGER" />
+    <result column="area" property="area" jdbcType="VARCHAR" />
+    <result column="caseposition" property="caseposition" jdbcType="VARCHAR" />
+    <result column="casestatus" property="casestatus" jdbcType="INTEGER" />
+    <result column="rdate" property="rdate" jdbcType="DATE" />
+    <result column="ddate" property="ddate" jdbcType="DATE" />
+    <result column="point" property="point" jdbcType="INTEGER" />
+    <result column="cpoint" property="cpoint" jdbcType="INTEGER" />
+    <result column="adminuid" property="adminuid" jdbcType="VARCHAR" />
+    <result column="readcnt" property="readcnt" jdbcType="INTEGER" />
+    <result column="sharecnt" property="sharecnt" jdbcType="INTEGER" />
+    <result column="joincnt" property="joincnt" jdbcType="INTEGER" />
+    <result column="cdate" property="cdate" jdbcType="TIMESTAMP" />
+    <result column="case_content_id" property="caseContentId" jdbcType="BIGINT" />
+    <result column="qrcode_logo" property="qrcodeLogo" jdbcType="VARCHAR" />
+    <result column="join_title" property="joinTitle" jdbcType="VARCHAR" />
+    <result column="share_title" property="shareTitle" jdbcType="VARCHAR" />
+    <result column="readmix" property="readmix" jdbcType="INTEGER" />
+    <result column="sharemix" property="sharemix" jdbcType="INTEGER" />
+    <result column="joinmix" property="joinmix" jdbcType="INTEGER" />
+    <result column="maxpoint" property="maxpoint" jdbcType="INTEGER" />
+    <result column="appid" property="appid" jdbcType="VARCHAR" />
+    <result column="labels" property="labels" jdbcType="VARCHAR" />
+    <result column="smallLogo" property="smalllogo" jdbcType="VARCHAR" />
+    <result column="small_logo" property="smallLogo" jdbcType="VARCHAR" />
+    <result column="isProduct" property="isproduct" jdbcType="INTEGER" />
+    <result column="location" property="location" jdbcType="INTEGER" />
+    <result column="sort" property="sort" jdbcType="INTEGER" />
+    <result column="offical_describe" property="officalDescribe" jdbcType="VARCHAR" />
+    <result column="background_color" property="backgroundColor" jdbcType="VARCHAR" />
+    <result column="title_color" property="titleColor" jdbcType="VARCHAR" />
+    <result column="commentcnt" property="commentcnt" jdbcType="INTEGER" />
+    <result column="off_time" property="offTime" jdbcType="DATE" />
+    <result column="default_comment" property="defaultComment" jdbcType="VARCHAR" />
+    <result column="default_nickname" property="defaultNickname" jdbcType="VARCHAR" />
+    <result column="casetype" property="casetype" jdbcType="VARCHAR" />
+    <result column="emp_name" property="empName" jdbcType="VARCHAR" />
+    <result column="headImg" property="headimg" jdbcType="VARCHAR" />
+    <result column="nickName" property="nickname" jdbcType="VARCHAR" />
+    <result column="phoneNo" property="phoneno" jdbcType="VARCHAR" />
+    <result column="isOriginal" property="isoriginal" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, name, product_name, `desc`, logo_pic, areaid, area, caseposition, casestatus, rdate, 
+    ddate, point, cpoint, adminuid, readcnt, sharecnt, joincnt, cdate, case_content_id, 
+    qrcode_logo, join_title, share_title, readmix, sharemix, joinmix, maxpoint, appid, 
+    labels, smallLogo, small_logo, isProduct, location, sort, offical_describe, background_color, 
+    title_color, commentcnt, off_time, default_comment, default_nickname, casetype, emp_name, 
+    headImg, nickName, phoneNo, isOriginal
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.njzhaomi.quartz.yuejia.povo.CaseExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from rru_case
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from rru_case
+    where id = #{id,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from rru_case
+    where id = #{id,jdbcType=DECIMAL}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.njzhaomi.quartz.yuejia.povo.CaseExample" >
+    delete from rru_case
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.njzhaomi.quartz.yuejia.povo.Case" >
+    insert into rru_case (id, name, product_name, 
+      desc, logo_pic, areaid, 
+      area, caseposition, casestatus, 
+      rdate, ddate, point, cpoint, 
+      adminuid, readcnt, sharecnt, 
+      joincnt, cdate, case_content_id, 
+      qrcode_logo, join_title, share_title, 
+      readmix, sharemix, joinmix, 
+      maxpoint, appid, labels, 
+      smallLogo, small_logo, isProduct, 
+      location, sort, offical_describe, 
+      background_color, title_color, commentcnt, 
+      off_time, default_comment, default_nickname, 
+      casetype, emp_name, headImg, 
+      nickName, phoneNo, isOriginal
+      )
+    values (#{id,jdbcType=DECIMAL}, #{name,jdbcType=VARCHAR}, #{productName,jdbcType=VARCHAR}, 
+      #{desc,jdbcType=VARCHAR}, #{logoPic,jdbcType=VARCHAR}, #{areaid,jdbcType=INTEGER}, 
+      #{area,jdbcType=VARCHAR}, #{caseposition,jdbcType=VARCHAR}, #{casestatus,jdbcType=INTEGER}, 
+      #{rdate,jdbcType=DATE}, #{ddate,jdbcType=DATE}, #{point,jdbcType=INTEGER}, #{cpoint,jdbcType=INTEGER}, 
+      #{adminuid,jdbcType=VARCHAR}, #{readcnt,jdbcType=INTEGER}, #{sharecnt,jdbcType=INTEGER}, 
+      #{joincnt,jdbcType=INTEGER}, #{cdate,jdbcType=TIMESTAMP}, #{caseContentId,jdbcType=BIGINT}, 
+      #{qrcodeLogo,jdbcType=VARCHAR}, #{joinTitle,jdbcType=VARCHAR}, #{shareTitle,jdbcType=VARCHAR}, 
+      #{readmix,jdbcType=INTEGER}, #{sharemix,jdbcType=INTEGER}, #{joinmix,jdbcType=INTEGER}, 
+      #{maxpoint,jdbcType=INTEGER}, #{appid,jdbcType=VARCHAR}, #{labels,jdbcType=VARCHAR}, 
+      #{smalllogo,jdbcType=VARCHAR}, #{smallLogo,jdbcType=VARCHAR}, #{isproduct,jdbcType=INTEGER}, 
+      #{location,jdbcType=INTEGER}, #{sort,jdbcType=INTEGER}, #{officalDescribe,jdbcType=VARCHAR}, 
+      #{backgroundColor,jdbcType=VARCHAR}, #{titleColor,jdbcType=VARCHAR}, #{commentcnt,jdbcType=INTEGER}, 
+      #{offTime,jdbcType=DATE}, #{defaultComment,jdbcType=VARCHAR}, #{defaultNickname,jdbcType=VARCHAR}, 
+      #{casetype,jdbcType=VARCHAR}, #{empName,jdbcType=VARCHAR}, #{headimg,jdbcType=VARCHAR}, 
+      #{nickname,jdbcType=VARCHAR}, #{phoneno,jdbcType=VARCHAR}, #{isoriginal,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.njzhaomi.quartz.yuejia.povo.Case" >
+    insert into rru_case
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="productName != null" >
+        product_name,
+      </if>
+      <if test="desc != null" >
+        desc,
+      </if>
+      <if test="logoPic != null" >
+        logo_pic,
+      </if>
+      <if test="areaid != null" >
+        areaid,
+      </if>
+      <if test="area != null" >
+        area,
+      </if>
+      <if test="caseposition != null" >
+        caseposition,
+      </if>
+      <if test="casestatus != null" >
+        casestatus,
+      </if>
+      <if test="rdate != null" >
+        rdate,
+      </if>
+      <if test="ddate != null" >
+        ddate,
+      </if>
+      <if test="point != null" >
+        point,
+      </if>
+      <if test="cpoint != null" >
+        cpoint,
+      </if>
+      <if test="adminuid != null" >
+        adminuid,
+      </if>
+      <if test="readcnt != null" >
+        readcnt,
+      </if>
+      <if test="sharecnt != null" >
+        sharecnt,
+      </if>
+      <if test="joincnt != null" >
+        joincnt,
+      </if>
+      <if test="cdate != null" >
+        cdate,
+      </if>
+      <if test="caseContentId != null" >
+        case_content_id,
+      </if>
+      <if test="qrcodeLogo != null" >
+        qrcode_logo,
+      </if>
+      <if test="joinTitle != null" >
+        join_title,
+      </if>
+      <if test="shareTitle != null" >
+        share_title,
+      </if>
+      <if test="readmix != null" >
+        readmix,
+      </if>
+      <if test="sharemix != null" >
+        sharemix,
+      </if>
+      <if test="joinmix != null" >
+        joinmix,
+      </if>
+      <if test="maxpoint != null" >
+        maxpoint,
+      </if>
+      <if test="appid != null" >
+        appid,
+      </if>
+      <if test="labels != null" >
+        labels,
+      </if>
+      <if test="smalllogo != null" >
+        smallLogo,
+      </if>
+      <if test="smallLogo != null" >
+        small_logo,
+      </if>
+      <if test="isproduct != null" >
+        isProduct,
+      </if>
+      <if test="location != null" >
+        location,
+      </if>
+      <if test="sort != null" >
+        sort,
+      </if>
+      <if test="officalDescribe != null" >
+        offical_describe,
+      </if>
+      <if test="backgroundColor != null" >
+        background_color,
+      </if>
+      <if test="titleColor != null" >
+        title_color,
+      </if>
+      <if test="commentcnt != null" >
+        commentcnt,
+      </if>
+      <if test="offTime != null" >
+        off_time,
+      </if>
+      <if test="defaultComment != null" >
+        default_comment,
+      </if>
+      <if test="defaultNickname != null" >
+        default_nickname,
+      </if>
+      <if test="casetype != null" >
+        casetype,
+      </if>
+      <if test="empName != null" >
+        emp_name,
+      </if>
+      <if test="headimg != null" >
+        headImg,
+      </if>
+      <if test="nickname != null" >
+        nickName,
+      </if>
+      <if test="phoneno != null" >
+        phoneNo,
+      </if>
+      <if test="isoriginal != null" >
+        isOriginal,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=DECIMAL},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="productName != null" >
+        #{productName,jdbcType=VARCHAR},
+      </if>
+      <if test="desc != null" >
+        #{desc,jdbcType=VARCHAR},
+      </if>
+      <if test="logoPic != null" >
+        #{logoPic,jdbcType=VARCHAR},
+      </if>
+      <if test="areaid != null" >
+        #{areaid,jdbcType=INTEGER},
+      </if>
+      <if test="area != null" >
+        #{area,jdbcType=VARCHAR},
+      </if>
+      <if test="caseposition != null" >
+        #{caseposition,jdbcType=VARCHAR},
+      </if>
+      <if test="casestatus != null" >
+        #{casestatus,jdbcType=INTEGER},
+      </if>
+      <if test="rdate != null" >
+        #{rdate,jdbcType=DATE},
+      </if>
+      <if test="ddate != null" >
+        #{ddate,jdbcType=DATE},
+      </if>
+      <if test="point != null" >
+        #{point,jdbcType=INTEGER},
+      </if>
+      <if test="cpoint != null" >
+        #{cpoint,jdbcType=INTEGER},
+      </if>
+      <if test="adminuid != null" >
+        #{adminuid,jdbcType=VARCHAR},
+      </if>
+      <if test="readcnt != null" >
+        #{readcnt,jdbcType=INTEGER},
+      </if>
+      <if test="sharecnt != null" >
+        #{sharecnt,jdbcType=INTEGER},
+      </if>
+      <if test="joincnt != null" >
+        #{joincnt,jdbcType=INTEGER},
+      </if>
+      <if test="cdate != null" >
+        #{cdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="caseContentId != null" >
+        #{caseContentId,jdbcType=BIGINT},
+      </if>
+      <if test="qrcodeLogo != null" >
+        #{qrcodeLogo,jdbcType=VARCHAR},
+      </if>
+      <if test="joinTitle != null" >
+        #{joinTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="shareTitle != null" >
+        #{shareTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="readmix != null" >
+        #{readmix,jdbcType=INTEGER},
+      </if>
+      <if test="sharemix != null" >
+        #{sharemix,jdbcType=INTEGER},
+      </if>
+      <if test="joinmix != null" >
+        #{joinmix,jdbcType=INTEGER},
+      </if>
+      <if test="maxpoint != null" >
+        #{maxpoint,jdbcType=INTEGER},
+      </if>
+      <if test="appid != null" >
+        #{appid,jdbcType=VARCHAR},
+      </if>
+      <if test="labels != null" >
+        #{labels,jdbcType=VARCHAR},
+      </if>
+      <if test="smalllogo != null" >
+        #{smalllogo,jdbcType=VARCHAR},
+      </if>
+      <if test="smallLogo != null" >
+        #{smallLogo,jdbcType=VARCHAR},
+      </if>
+      <if test="isproduct != null" >
+        #{isproduct,jdbcType=INTEGER},
+      </if>
+      <if test="location != null" >
+        #{location,jdbcType=INTEGER},
+      </if>
+      <if test="sort != null" >
+        #{sort,jdbcType=INTEGER},
+      </if>
+      <if test="officalDescribe != null" >
+        #{officalDescribe,jdbcType=VARCHAR},
+      </if>
+      <if test="backgroundColor != null" >
+        #{backgroundColor,jdbcType=VARCHAR},
+      </if>
+      <if test="titleColor != null" >
+        #{titleColor,jdbcType=VARCHAR},
+      </if>
+      <if test="commentcnt != null" >
+        #{commentcnt,jdbcType=INTEGER},
+      </if>
+      <if test="offTime != null" >
+        #{offTime,jdbcType=DATE},
+      </if>
+      <if test="defaultComment != null" >
+        #{defaultComment,jdbcType=VARCHAR},
+      </if>
+      <if test="defaultNickname != null" >
+        #{defaultNickname,jdbcType=VARCHAR},
+      </if>
+      <if test="casetype != null" >
+        #{casetype,jdbcType=VARCHAR},
+      </if>
+      <if test="empName != null" >
+        #{empName,jdbcType=VARCHAR},
+      </if>
+      <if test="headimg != null" >
+        #{headimg,jdbcType=VARCHAR},
+      </if>
+      <if test="nickname != null" >
+        #{nickname,jdbcType=VARCHAR},
+      </if>
+      <if test="phoneno != null" >
+        #{phoneno,jdbcType=VARCHAR},
+      </if>
+      <if test="isoriginal != null" >
+        #{isoriginal,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.njzhaomi.quartz.yuejia.povo.CaseExample" resultType="java.lang.Integer" >
+    select count(*) from rru_case
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update rru_case
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=DECIMAL},
+      </if>
+      <if test="record.name != null" >
+        name = #{record.name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.productName != null" >
+        product_name = #{record.productName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.desc != null" >
+        `desc` = #{record.desc,jdbcType=VARCHAR},
+      </if>
+      <if test="record.logoPic != null" >
+        logo_pic = #{record.logoPic,jdbcType=VARCHAR},
+      </if>
+      <if test="record.areaid != null" >
+        areaid = #{record.areaid,jdbcType=INTEGER},
+      </if>
+      <if test="record.area != null" >
+        area = #{record.area,jdbcType=VARCHAR},
+      </if>
+      <if test="record.caseposition != null" >
+        caseposition = #{record.caseposition,jdbcType=VARCHAR},
+      </if>
+      <if test="record.casestatus != null" >
+        casestatus = #{record.casestatus,jdbcType=INTEGER},
+      </if>
+      <if test="record.rdate != null" >
+        rdate = #{record.rdate,jdbcType=DATE},
+      </if>
+      <if test="record.ddate != null" >
+        ddate = #{record.ddate,jdbcType=DATE},
+      </if>
+      <if test="record.point != null" >
+        point = #{record.point,jdbcType=INTEGER},
+      </if>
+      <if test="record.cpoint != null" >
+        cpoint = #{record.cpoint,jdbcType=INTEGER},
+      </if>
+      <if test="record.adminuid != null" >
+        adminuid = #{record.adminuid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.readcnt != null" >
+        readcnt = #{record.readcnt,jdbcType=INTEGER},
+      </if>
+      <if test="record.sharecnt != null" >
+        sharecnt = #{record.sharecnt,jdbcType=INTEGER},
+      </if>
+      <if test="record.joincnt != null" >
+        joincnt = #{record.joincnt,jdbcType=INTEGER},
+      </if>
+      <if test="record.cdate != null" >
+        cdate = #{record.cdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.caseContentId != null" >
+        case_content_id = #{record.caseContentId,jdbcType=BIGINT},
+      </if>
+      <if test="record.qrcodeLogo != null" >
+        qrcode_logo = #{record.qrcodeLogo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.joinTitle != null" >
+        join_title = #{record.joinTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="record.shareTitle != null" >
+        share_title = #{record.shareTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="record.readmix != null" >
+        readmix = #{record.readmix,jdbcType=INTEGER},
+      </if>
+      <if test="record.sharemix != null" >
+        sharemix = #{record.sharemix,jdbcType=INTEGER},
+      </if>
+      <if test="record.joinmix != null" >
+        joinmix = #{record.joinmix,jdbcType=INTEGER},
+      </if>
+      <if test="record.maxpoint != null" >
+        maxpoint = #{record.maxpoint,jdbcType=INTEGER},
+      </if>
+      <if test="record.appid != null" >
+        appid = #{record.appid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.labels != null" >
+        labels = #{record.labels,jdbcType=VARCHAR},
+      </if>
+      <if test="record.smalllogo != null" >
+        smallLogo = #{record.smalllogo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.smallLogo != null" >
+        small_logo = #{record.smallLogo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isproduct != null" >
+        isProduct = #{record.isproduct,jdbcType=INTEGER},
+      </if>
+      <if test="record.location != null" >
+        location = #{record.location,jdbcType=INTEGER},
+      </if>
+      <if test="record.sort != null" >
+        sort = #{record.sort,jdbcType=INTEGER},
+      </if>
+      <if test="record.officalDescribe != null" >
+        offical_describe = #{record.officalDescribe,jdbcType=VARCHAR},
+      </if>
+      <if test="record.backgroundColor != null" >
+        background_color = #{record.backgroundColor,jdbcType=VARCHAR},
+      </if>
+      <if test="record.titleColor != null" >
+        title_color = #{record.titleColor,jdbcType=VARCHAR},
+      </if>
+      <if test="record.commentcnt != null" >
+        commentcnt = #{record.commentcnt,jdbcType=INTEGER},
+      </if>
+      <if test="record.offTime != null" >
+        off_time = #{record.offTime,jdbcType=DATE},
+      </if>
+      <if test="record.defaultComment != null" >
+        default_comment = #{record.defaultComment,jdbcType=VARCHAR},
+      </if>
+      <if test="record.defaultNickname != null" >
+        default_nickname = #{record.defaultNickname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.casetype != null" >
+        casetype = #{record.casetype,jdbcType=VARCHAR},
+      </if>
+      <if test="record.empName != null" >
+        emp_name = #{record.empName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.headimg != null" >
+        headImg = #{record.headimg,jdbcType=VARCHAR},
+      </if>
+      <if test="record.nickname != null" >
+        nickName = #{record.nickname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.phoneno != null" >
+        phoneNo = #{record.phoneno,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isoriginal != null" >
+        isOriginal = #{record.isoriginal,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update rru_case
+    set id = #{record.id,jdbcType=DECIMAL},
+      name = #{record.name,jdbcType=VARCHAR},
+      product_name = #{record.productName,jdbcType=VARCHAR},
+      desc = #{record.desc,jdbcType=VARCHAR},
+      logo_pic = #{record.logoPic,jdbcType=VARCHAR},
+      areaid = #{record.areaid,jdbcType=INTEGER},
+      area = #{record.area,jdbcType=VARCHAR},
+      caseposition = #{record.caseposition,jdbcType=VARCHAR},
+      casestatus = #{record.casestatus,jdbcType=INTEGER},
+      rdate = #{record.rdate,jdbcType=DATE},
+      ddate = #{record.ddate,jdbcType=DATE},
+      point = #{record.point,jdbcType=INTEGER},
+      cpoint = #{record.cpoint,jdbcType=INTEGER},
+      adminuid = #{record.adminuid,jdbcType=VARCHAR},
+      readcnt = #{record.readcnt,jdbcType=INTEGER},
+      sharecnt = #{record.sharecnt,jdbcType=INTEGER},
+      joincnt = #{record.joincnt,jdbcType=INTEGER},
+      cdate = #{record.cdate,jdbcType=TIMESTAMP},
+      case_content_id = #{record.caseContentId,jdbcType=BIGINT},
+      qrcode_logo = #{record.qrcodeLogo,jdbcType=VARCHAR},
+      join_title = #{record.joinTitle,jdbcType=VARCHAR},
+      share_title = #{record.shareTitle,jdbcType=VARCHAR},
+      readmix = #{record.readmix,jdbcType=INTEGER},
+      sharemix = #{record.sharemix,jdbcType=INTEGER},
+      joinmix = #{record.joinmix,jdbcType=INTEGER},
+      maxpoint = #{record.maxpoint,jdbcType=INTEGER},
+      appid = #{record.appid,jdbcType=VARCHAR},
+      labels = #{record.labels,jdbcType=VARCHAR},
+      smallLogo = #{record.smalllogo,jdbcType=VARCHAR},
+      small_logo = #{record.smallLogo,jdbcType=VARCHAR},
+      isProduct = #{record.isproduct,jdbcType=INTEGER},
+      location = #{record.location,jdbcType=INTEGER},
+      sort = #{record.sort,jdbcType=INTEGER},
+      offical_describe = #{record.officalDescribe,jdbcType=VARCHAR},
+      background_color = #{record.backgroundColor,jdbcType=VARCHAR},
+      title_color = #{record.titleColor,jdbcType=VARCHAR},
+      commentcnt = #{record.commentcnt,jdbcType=INTEGER},
+      off_time = #{record.offTime,jdbcType=DATE},
+      default_comment = #{record.defaultComment,jdbcType=VARCHAR},
+      default_nickname = #{record.defaultNickname,jdbcType=VARCHAR},
+      casetype = #{record.casetype,jdbcType=VARCHAR},
+      emp_name = #{record.empName,jdbcType=VARCHAR},
+      headImg = #{record.headimg,jdbcType=VARCHAR},
+      nickName = #{record.nickname,jdbcType=VARCHAR},
+      phoneNo = #{record.phoneno,jdbcType=VARCHAR},
+      isOriginal = #{record.isoriginal,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.njzhaomi.quartz.yuejia.povo.Case" >
+    update rru_case
+    <set >
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="productName != null" >
+        product_name = #{productName,jdbcType=VARCHAR},
+      </if>
+      <if test="desc != null" >
+        desc = #{desc,jdbcType=VARCHAR},
+      </if>
+      <if test="logoPic != null" >
+        logo_pic = #{logoPic,jdbcType=VARCHAR},
+      </if>
+      <if test="areaid != null" >
+        areaid = #{areaid,jdbcType=INTEGER},
+      </if>
+      <if test="area != null" >
+        area = #{area,jdbcType=VARCHAR},
+      </if>
+      <if test="caseposition != null" >
+        caseposition = #{caseposition,jdbcType=VARCHAR},
+      </if>
+      <if test="casestatus != null" >
+        casestatus = #{casestatus,jdbcType=INTEGER},
+      </if>
+      <if test="rdate != null" >
+        rdate = #{rdate,jdbcType=DATE},
+      </if>
+      <if test="ddate != null" >
+        ddate = #{ddate,jdbcType=DATE},
+      </if>
+      <if test="point != null" >
+        point = #{point,jdbcType=INTEGER},
+      </if>
+      <if test="cpoint != null" >
+        cpoint = #{cpoint,jdbcType=INTEGER},
+      </if>
+      <if test="adminuid != null" >
+        adminuid = #{adminuid,jdbcType=VARCHAR},
+      </if>
+      <if test="readcnt != null" >
+        readcnt = #{readcnt,jdbcType=INTEGER},
+      </if>
+      <if test="sharecnt != null" >
+        sharecnt = #{sharecnt,jdbcType=INTEGER},
+      </if>
+      <if test="joincnt != null" >
+        joincnt = #{joincnt,jdbcType=INTEGER},
+      </if>
+      <if test="cdate != null" >
+        cdate = #{cdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="caseContentId != null" >
+        case_content_id = #{caseContentId,jdbcType=BIGINT},
+      </if>
+      <if test="qrcodeLogo != null" >
+        qrcode_logo = #{qrcodeLogo,jdbcType=VARCHAR},
+      </if>
+      <if test="joinTitle != null" >
+        join_title = #{joinTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="shareTitle != null" >
+        share_title = #{shareTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="readmix != null" >
+        readmix = #{readmix,jdbcType=INTEGER},
+      </if>
+      <if test="sharemix != null" >
+        sharemix = #{sharemix,jdbcType=INTEGER},
+      </if>
+      <if test="joinmix != null" >
+        joinmix = #{joinmix,jdbcType=INTEGER},
+      </if>
+      <if test="maxpoint != null" >
+        maxpoint = #{maxpoint,jdbcType=INTEGER},
+      </if>
+      <if test="appid != null" >
+        appid = #{appid,jdbcType=VARCHAR},
+      </if>
+      <if test="labels != null" >
+        labels = #{labels,jdbcType=VARCHAR},
+      </if>
+      <if test="smalllogo != null" >
+        smallLogo = #{smalllogo,jdbcType=VARCHAR},
+      </if>
+      <if test="smallLogo != null" >
+        small_logo = #{smallLogo,jdbcType=VARCHAR},
+      </if>
+      <if test="isproduct != null" >
+        isProduct = #{isproduct,jdbcType=INTEGER},
+      </if>
+      <if test="location != null" >
+        location = #{location,jdbcType=INTEGER},
+      </if>
+      <if test="sort != null" >
+        sort = #{sort,jdbcType=INTEGER},
+      </if>
+      <if test="officalDescribe != null" >
+        offical_describe = #{officalDescribe,jdbcType=VARCHAR},
+      </if>
+      <if test="backgroundColor != null" >
+        background_color = #{backgroundColor,jdbcType=VARCHAR},
+      </if>
+      <if test="titleColor != null" >
+        title_color = #{titleColor,jdbcType=VARCHAR},
+      </if>
+      <if test="commentcnt != null" >
+        commentcnt = #{commentcnt,jdbcType=INTEGER},
+      </if>
+      <if test="offTime != null" >
+        off_time = #{offTime,jdbcType=DATE},
+      </if>
+      <if test="defaultComment != null" >
+        default_comment = #{defaultComment,jdbcType=VARCHAR},
+      </if>
+      <if test="defaultNickname != null" >
+        default_nickname = #{defaultNickname,jdbcType=VARCHAR},
+      </if>
+      <if test="casetype != null" >
+        casetype = #{casetype,jdbcType=VARCHAR},
+      </if>
+      <if test="empName != null" >
+        emp_name = #{empName,jdbcType=VARCHAR},
+      </if>
+      <if test="headimg != null" >
+        headImg = #{headimg,jdbcType=VARCHAR},
+      </if>
+      <if test="nickname != null" >
+        nickName = #{nickname,jdbcType=VARCHAR},
+      </if>
+      <if test="phoneno != null" >
+        phoneNo = #{phoneno,jdbcType=VARCHAR},
+      </if>
+      <if test="isoriginal != null" >
+        isOriginal = #{isoriginal,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.njzhaomi.quartz.yuejia.povo.Case" >
+    update rru_case
+    set name = #{name,jdbcType=VARCHAR},
+      product_name = #{productName,jdbcType=VARCHAR},
+     <!--  `desc` = #{desc,jdbcType=VARCHAR}, -->
+      logo_pic = #{logoPic,jdbcType=VARCHAR},
+      areaid = #{areaid,jdbcType=INTEGER},
+      area = #{area,jdbcType=VARCHAR},
+      caseposition = #{caseposition,jdbcType=VARCHAR},
+      casestatus = #{casestatus,jdbcType=INTEGER},
+      rdate = #{rdate,jdbcType=DATE},
+      ddate = #{ddate,jdbcType=DATE},
+      point = #{point,jdbcType=INTEGER},
+      cpoint = #{cpoint,jdbcType=INTEGER},
+      adminuid = #{adminuid,jdbcType=VARCHAR},
+      readcnt = #{readcnt,jdbcType=INTEGER},
+      sharecnt = #{sharecnt,jdbcType=INTEGER},
+      joincnt = #{joincnt,jdbcType=INTEGER},
+      cdate = #{cdate,jdbcType=TIMESTAMP},
+      case_content_id = #{caseContentId,jdbcType=BIGINT},
+      qrcode_logo = #{qrcodeLogo,jdbcType=VARCHAR},
+      join_title = #{joinTitle,jdbcType=VARCHAR},
+      share_title = #{shareTitle,jdbcType=VARCHAR},
+      readmix = #{readmix,jdbcType=INTEGER},
+      sharemix = #{sharemix,jdbcType=INTEGER},
+      joinmix = #{joinmix,jdbcType=INTEGER},
+      maxpoint = #{maxpoint,jdbcType=INTEGER},
+      appid = #{appid,jdbcType=VARCHAR},
+      labels = #{labels,jdbcType=VARCHAR},
+      smallLogo = #{smalllogo,jdbcType=VARCHAR},
+      small_logo = #{smallLogo,jdbcType=VARCHAR},
+      isProduct = #{isproduct,jdbcType=INTEGER},
+      location = #{location,jdbcType=INTEGER},
+      sort = #{sort,jdbcType=INTEGER},
+      offical_describe = #{officalDescribe,jdbcType=VARCHAR},
+      background_color = #{backgroundColor,jdbcType=VARCHAR},
+      title_color = #{titleColor,jdbcType=VARCHAR},
+      commentcnt = #{commentcnt,jdbcType=INTEGER},
+      off_time = #{offTime,jdbcType=DATE},
+      default_comment = #{defaultComment,jdbcType=VARCHAR},
+      default_nickname = #{defaultNickname,jdbcType=VARCHAR},
+      casetype = #{casetype,jdbcType=VARCHAR},
+      emp_name = #{empName,jdbcType=VARCHAR},
+      headImg = #{headimg,jdbcType=VARCHAR},
+      nickName = #{nickname,jdbcType=VARCHAR},
+      phoneNo = #{phoneno,jdbcType=VARCHAR},
+      isOriginal = #{isoriginal,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=DECIMAL}
+  </update>
+
+	<select id="page" resultType="com.njzhaomi.quartz.yuejia.povo.Case">
+		select
+		<include refid="Base_Column_List" />
+		from rru_case  where rdate &lt; <!-- rdate &lt;= #{date} and ddate &rt;=
+		#{date} and--> now() and
+		(caseStatus=1 or caseStatus=-9)
+		and  appid= #{appID} 
+		 and ddate >= now()
+	</select> 
+  
+</mapper>

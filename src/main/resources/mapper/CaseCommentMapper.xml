@@ -1,0 +1,385 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.njzhaomi.quartz.yuejia.dao.CaseCommentMapper" >
+  <resultMap id="BaseResultMap" type="com.njzhaomi.quartz.yuejia.povo.CaseComment" >
+    <id column="id" property="id" jdbcType="DECIMAL" />
+    <result column="caseid" property="caseid" jdbcType="INTEGER" />
+    <result column="content" property="content" jdbcType="VARCHAR" />
+    <result column="uid" property="uid" jdbcType="VARCHAR" />
+    <result column="uname" property="uname" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="pid" property="pid" jdbcType="INTEGER" />
+    <result column="re_uid" property="reUid" jdbcType="VARCHAR" />
+    <result column="re_uname" property="reUname" jdbcType="VARCHAR" />
+    <result column="deal_user_id" property="dealUserId" jdbcType="VARCHAR" />
+    <result column="headimg" property="headimg" jdbcType="VARCHAR" />
+    <result column="root_id" property="rootId" jdbcType="INTEGER" />
+    <result column="status" property="status" jdbcType="INTEGER" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="praise_count" property="praiseCount" jdbcType="INTEGER" />
+    <result column="entity" property="entity" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, caseid, content, uid, uname, create_time, pid, re_uid, re_uname, deal_user_id, 
+    headimg, root_id, status, update_time, praise_count, entity
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.njzhaomi.quartz.yuejia.povo.CaseCommentExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from rru_case_commet
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from rru_case_commet
+    where id = #{id,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from rru_case_commet
+    where id = #{id,jdbcType=DECIMAL}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.njzhaomi.quartz.yuejia.povo.CaseCommentExample" >
+    delete from rru_case_commet
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.njzhaomi.quartz.yuejia.povo.CaseComment" >
+    insert into rru_case_commet (id, caseid, content, 
+      uid, uname, create_time, 
+      pid, re_uid, re_uname, 
+      deal_user_id, headimg, root_id, 
+      status, update_time, praise_count, 
+      entity)
+    values (#{id,jdbcType=DECIMAL}, #{caseid,jdbcType=INTEGER}, #{content,jdbcType=VARCHAR}, 
+      #{uid,jdbcType=VARCHAR}, #{uname,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{pid,jdbcType=INTEGER}, #{reUid,jdbcType=VARCHAR}, #{reUname,jdbcType=VARCHAR}, 
+      #{dealUserId,jdbcType=VARCHAR}, #{headimg,jdbcType=VARCHAR}, #{rootId,jdbcType=INTEGER}, 
+      #{status,jdbcType=INTEGER}, #{updateTime,jdbcType=TIMESTAMP}, #{praiseCount,jdbcType=INTEGER}, 
+      #{entity,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.njzhaomi.quartz.yuejia.povo.CaseComment" >
+    insert into rru_case_commet
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="caseid != null" >
+        caseid,
+      </if>
+      <if test="content != null" >
+        content,
+      </if>
+      <if test="uid != null" >
+        uid,
+      </if>
+      <if test="uname != null" >
+        uname,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="pid != null" >
+        pid,
+      </if>
+      <if test="reUid != null" >
+        re_uid,
+      </if>
+      <if test="reUname != null" >
+        re_uname,
+      </if>
+      <if test="dealUserId != null" >
+        deal_user_id,
+      </if>
+      <if test="headimg != null" >
+        headimg,
+      </if>
+      <if test="rootId != null" >
+        root_id,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+      <if test="praiseCount != null" >
+        praise_count,
+      </if>
+      <if test="entity != null" >
+        entity,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=DECIMAL},
+      </if>
+      <if test="caseid != null" >
+        #{caseid,jdbcType=INTEGER},
+      </if>
+      <if test="content != null" >
+        #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="uid != null" >
+        #{uid,jdbcType=VARCHAR},
+      </if>
+      <if test="uname != null" >
+        #{uname,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="pid != null" >
+        #{pid,jdbcType=INTEGER},
+      </if>
+      <if test="reUid != null" >
+        #{reUid,jdbcType=VARCHAR},
+      </if>
+      <if test="reUname != null" >
+        #{reUname,jdbcType=VARCHAR},
+      </if>
+      <if test="dealUserId != null" >
+        #{dealUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="headimg != null" >
+        #{headimg,jdbcType=VARCHAR},
+      </if>
+      <if test="rootId != null" >
+        #{rootId,jdbcType=INTEGER},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="praiseCount != null" >
+        #{praiseCount,jdbcType=INTEGER},
+      </if>
+      <if test="entity != null" >
+        #{entity,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.njzhaomi.quartz.yuejia.povo.CaseCommentExample" resultType="java.lang.Integer" >
+    select count(*) from rru_case_commet
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update rru_case_commet
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=DECIMAL},
+      </if>
+      <if test="record.caseid != null" >
+        caseid = #{record.caseid,jdbcType=INTEGER},
+      </if>
+      <if test="record.content != null" >
+        content = #{record.content,jdbcType=VARCHAR},
+      </if>
+      <if test="record.uid != null" >
+        uid = #{record.uid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.uname != null" >
+        uname = #{record.uname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createTime != null" >
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.pid != null" >
+        pid = #{record.pid,jdbcType=INTEGER},
+      </if>
+      <if test="record.reUid != null" >
+        re_uid = #{record.reUid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.reUname != null" >
+        re_uname = #{record.reUname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.dealUserId != null" >
+        deal_user_id = #{record.dealUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.headimg != null" >
+        headimg = #{record.headimg,jdbcType=VARCHAR},
+      </if>
+      <if test="record.rootId != null" >
+        root_id = #{record.rootId,jdbcType=INTEGER},
+      </if>
+      <if test="record.status != null" >
+        status = #{record.status,jdbcType=INTEGER},
+      </if>
+      <if test="record.updateTime != null" >
+        update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.praiseCount != null" >
+        praise_count = #{record.praiseCount,jdbcType=INTEGER},
+      </if>
+      <if test="record.entity != null" >
+        entity = #{record.entity,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update rru_case_commet
+    set id = #{record.id,jdbcType=DECIMAL},
+      caseid = #{record.caseid,jdbcType=INTEGER},
+      content = #{record.content,jdbcType=VARCHAR},
+      uid = #{record.uid,jdbcType=VARCHAR},
+      uname = #{record.uname,jdbcType=VARCHAR},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      pid = #{record.pid,jdbcType=INTEGER},
+      re_uid = #{record.reUid,jdbcType=VARCHAR},
+      re_uname = #{record.reUname,jdbcType=VARCHAR},
+      deal_user_id = #{record.dealUserId,jdbcType=VARCHAR},
+      headimg = #{record.headimg,jdbcType=VARCHAR},
+      root_id = #{record.rootId,jdbcType=INTEGER},
+      status = #{record.status,jdbcType=INTEGER},
+      update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      praise_count = #{record.praiseCount,jdbcType=INTEGER},
+      entity = #{record.entity,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.njzhaomi.quartz.yuejia.povo.CaseComment" >
+    update rru_case_commet
+    <set >
+      <if test="caseid != null" >
+        caseid = #{caseid,jdbcType=INTEGER},
+      </if>
+      <if test="content != null" >
+        content = #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="uid != null" >
+        uid = #{uid,jdbcType=VARCHAR},
+      </if>
+      <if test="uname != null" >
+        uname = #{uname,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="pid != null" >
+        pid = #{pid,jdbcType=INTEGER},
+      </if>
+      <if test="reUid != null" >
+        re_uid = #{reUid,jdbcType=VARCHAR},
+      </if>
+      <if test="reUname != null" >
+        re_uname = #{reUname,jdbcType=VARCHAR},
+      </if>
+      <if test="dealUserId != null" >
+        deal_user_id = #{dealUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="headimg != null" >
+        headimg = #{headimg,jdbcType=VARCHAR},
+      </if>
+      <if test="rootId != null" >
+        root_id = #{rootId,jdbcType=INTEGER},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="praiseCount != null" >
+        praise_count = #{praiseCount,jdbcType=INTEGER},
+      </if>
+      <if test="entity != null" >
+        entity = #{entity,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.njzhaomi.quartz.yuejia.povo.CaseComment" >
+    update rru_case_commet
+    set caseid = #{caseid,jdbcType=INTEGER},
+      content = #{content,jdbcType=VARCHAR},
+      uid = #{uid,jdbcType=VARCHAR},
+      uname = #{uname,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      pid = #{pid,jdbcType=INTEGER},
+      re_uid = #{reUid,jdbcType=VARCHAR},
+      re_uname = #{reUname,jdbcType=VARCHAR},
+      deal_user_id = #{dealUserId,jdbcType=VARCHAR},
+      headimg = #{headimg,jdbcType=VARCHAR},
+      root_id = #{rootId,jdbcType=INTEGER},
+      status = #{status,jdbcType=INTEGER},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      praise_count = #{praiseCount,jdbcType=INTEGER},
+      entity = #{entity,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=DECIMAL}
+  </update>
+</mapper>

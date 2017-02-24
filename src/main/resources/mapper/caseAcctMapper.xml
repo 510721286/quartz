@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.njzhaomi.quartz.yuejia.dao.CaseAcctMapperMapper">
+
+	<resultMap type="com.njzhaomi.quartz.yuejia.povo.CaseAcct"
+		id="caseAcctMap">
+		<result column="OPENID" property="openId" jdbcType="VARCHAR" />
+		<result column="NUM" property="num" jdbcType="VARCHAR" />
+	</resultMap>
+
+	<select id="loadData" resultMap="caseAcctMap">
+		SELECT
+		a.openId,
+		a.num
+		FROM
+		(
+		SELECT
+		t.openId AS openId,
+		COUNT(r.id) AS num,
+		t.orgLevelOneId
+		FROM
+		t_wanxin_employeeinfo t
+		JOIN rru_customer_rela r ON
+		(
+		t.cid = r.upid
+		OR t.cid = r.upupid
+		)
+		WHERE
+		r.`status` = 1
+		AND r.cid IS NOT
+		NULL
+		AND r.become_vipdate &gt;= #{beginDate}
+		AND
+		r.become_vipdate &lt;
+		#{endDate}
+		GROUP BY
+		openId
+		) a
+		<choose>
+			<when test="identity != null and identity != 6">
+				WHERE a.orgLevelOneId=10 OR a.orgLevelOneId=7 OR
+				a.orgLevelOneId=5 GROUP BY a.openId ORDER BY num DESC LIMIT 10
+			</when>
+			<otherwise>
+				WHERE a.orgLevelOneId=11 OR a.orgLevelOneId=6 GROUP BY
+				a.openId ORDER BY num DESC LIMIT 10
+			</otherwise>
+		</choose>
+
+
+	</select>
+
+
+
+
+	 <select id="loadPart" resultMap="caseAcctMap">
+		SELECT
+		o.upOpenid as openId,
+		ROUND(SUM(o.order_total_price) / 100,2) as num
+		<!-- ,SUM(o.product_count)   暂时注释-->
+		FROM
+		wx_order o
+		JOIN t_wanxin_employeeinfo t ON o.upOpenid = t.openid
+		WHERE
+		o.order_status != 21
+		AND o.order_id IS NOT NULL
+		AND o.orderCreateTime &gt;= #{beginDate}
+		AND o.orderCreateTime &lt; #{endDate}
+		<choose>
+			<when test="identity != null and identity != 6">
+				and (t.orgLevelOneId=10 or t.orgLevelOneId=7 or
+				t.orgLevelOneId=5) GROUP BY o.upOpenid ORDER BY
+				SUM(order_total_price) DESC LIMIT 10
+			</when>
+			<otherwise>
+				and (t.orgLevelOneId=11 or t.orgLevelOneId=6)
+				GROUP BY o.upOpenid ORDER BY SUM(order_total_price) DESC LIMIT 10
+			</otherwise>
+		</choose>
+	</select> 
+</mapper> 
+

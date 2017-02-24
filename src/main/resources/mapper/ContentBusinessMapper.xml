@@ -1,0 +1,266 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.njzhaomi.quartz.yuejia.dao.ContentBusinessMapper" >
+  <resultMap id="BaseResultMap" type="com.njzhaomi.quartz.yuejia.povo.ContentBusiness" >
+    <id column="id" property="id" jdbcType="DECIMAL" />
+    <result column="comment_count" property="commentCount" jdbcType="INTEGER" />
+    <result column="entity" property="entity" jdbcType="VARCHAR" />
+    <result column="entity_id" property="entityId" jdbcType="INTEGER" />
+    <result column="gratuity_count" property="gratuityCount" jdbcType="INTEGER" />
+    <result column="read_count" property="readCount" jdbcType="INTEGER" />
+    <result column="share_count" property="shareCount" jdbcType="INTEGER" />
+    <result column="like_count" property="likeCount" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, comment_count, entity, entity_id, gratuity_count, read_count, share_count, like_count
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.njzhaomi.quartz.yuejia.povo.ContentBusinessExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from t_content_business_stat
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_content_business_stat
+    where id = #{id,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from t_content_business_stat
+    where id = #{id,jdbcType=DECIMAL}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.njzhaomi.quartz.yuejia.povo.ContentBusinessExample" >
+    delete from t_content_business_stat
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.njzhaomi.quartz.yuejia.povo.ContentBusiness" >
+    insert into t_content_business_stat (id, comment_count, entity, 
+      entity_id, gratuity_count, read_count, 
+      share_count, like_count)
+    values (#{id,jdbcType=DECIMAL}, #{commentCount,jdbcType=INTEGER}, #{entity,jdbcType=VARCHAR}, 
+      #{entityId,jdbcType=INTEGER}, #{gratuityCount,jdbcType=INTEGER}, #{readCount,jdbcType=INTEGER}, 
+      #{shareCount,jdbcType=INTEGER}, #{likeCount,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.njzhaomi.quartz.yuejia.povo.ContentBusiness" >
+    insert into t_content_business_stat
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="commentCount != null" >
+        comment_count,
+      </if>
+      <if test="entity != null" >
+        entity,
+      </if>
+      <if test="entityId != null" >
+        entity_id,
+      </if>
+      <if test="gratuityCount != null" >
+        gratuity_count,
+      </if>
+      <if test="readCount != null" >
+        read_count,
+      </if>
+      <if test="shareCount != null" >
+        share_count,
+      </if>
+      <if test="likeCount != null" >
+        like_count,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=DECIMAL},
+      </if>
+      <if test="commentCount != null" >
+        #{commentCount,jdbcType=INTEGER},
+      </if>
+      <if test="entity != null" >
+        #{entity,jdbcType=VARCHAR},
+      </if>
+      <if test="entityId != null" >
+        #{entityId,jdbcType=INTEGER},
+      </if>
+      <if test="gratuityCount != null" >
+        #{gratuityCount,jdbcType=INTEGER},
+      </if>
+      <if test="readCount != null" >
+        #{readCount,jdbcType=INTEGER},
+      </if>
+      <if test="shareCount != null" >
+        #{shareCount,jdbcType=INTEGER},
+      </if>
+      <if test="likeCount != null" >
+        #{likeCount,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.njzhaomi.quartz.yuejia.povo.ContentBusinessExample" resultType="java.lang.Integer" >
+    select count(*) from t_content_business_stat
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update t_content_business_stat
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=DECIMAL},
+      </if>
+      <if test="record.commentCount != null" >
+        comment_count = #{record.commentCount,jdbcType=INTEGER},
+      </if>
+      <if test="record.entity != null" >
+        entity = #{record.entity,jdbcType=VARCHAR},
+      </if>
+      <if test="record.entityId != null" >
+        entity_id = #{record.entityId,jdbcType=INTEGER},
+      </if>
+      <if test="record.gratuityCount != null" >
+        gratuity_count = #{record.gratuityCount,jdbcType=INTEGER},
+      </if>
+      <if test="record.readCount != null" >
+        read_count = #{record.readCount,jdbcType=INTEGER},
+      </if>
+      <if test="record.shareCount != null" >
+        share_count = #{record.shareCount,jdbcType=INTEGER},
+      </if>
+      <if test="record.likeCount != null" >
+        like_count = #{record.likeCount,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update t_content_business_stat
+    set id = #{record.id,jdbcType=DECIMAL},
+      comment_count = #{record.commentCount,jdbcType=INTEGER},
+      entity = #{record.entity,jdbcType=VARCHAR},
+      entity_id = #{record.entityId,jdbcType=INTEGER},
+      gratuity_count = #{record.gratuityCount,jdbcType=INTEGER},
+      read_count = #{record.readCount,jdbcType=INTEGER},
+      share_count = #{record.shareCount,jdbcType=INTEGER},
+      like_count = #{record.likeCount,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.njzhaomi.quartz.yuejia.povo.ContentBusiness" >
+    update t_content_business_stat
+    <set >
+      <if test="commentCount != null" >
+        comment_count = #{commentCount,jdbcType=INTEGER},
+      </if>
+      <if test="entity != null" >
+        entity = #{entity,jdbcType=VARCHAR},
+      </if>
+      <if test="entityId != null" >
+        entity_id = #{entityId,jdbcType=INTEGER},
+      </if>
+      <if test="gratuityCount != null" >
+        gratuity_count = #{gratuityCount,jdbcType=INTEGER},
+      </if>
+      <if test="readCount != null" >
+        read_count = #{readCount,jdbcType=INTEGER},
+      </if>
+      <if test="shareCount != null" >
+        share_count = #{shareCount,jdbcType=INTEGER},
+      </if>
+      <if test="likeCount != null" >
+        like_count = #{likeCount,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.njzhaomi.quartz.yuejia.povo.ContentBusiness" >
+    update t_content_business_stat
+    set comment_count = #{commentCount,jdbcType=INTEGER},
+      entity = #{entity,jdbcType=VARCHAR},
+      entity_id = #{entityId,jdbcType=INTEGER},
+      gratuity_count = #{gratuityCount,jdbcType=INTEGER},
+      read_count = #{readCount,jdbcType=INTEGER},
+      share_count = #{shareCount,jdbcType=INTEGER},
+      like_count = #{likeCount,jdbcType=INTEGER}
+    where id = #{id,jdbcType=DECIMAL}
+  </update>
+  <select id="selectAll" resultMap="BaseResultMap" parameterType="com.njzhaomi.quartz.yuejia.povo.ContentBusinessExample" >
+  SELECT t2.caseid  entity_id,t1.rcNum comment_count, t2.readcnt read_count,t2.sharecnt share_count ,t1.entity entity from 
+(select sum(ra.readcnt) readcnt ,sum(ra.sharecnt) as sharecnt ,ra.caseid  from rru_extend_case_acct ra group by ra.caseid) t2
+left JOIN
+(select COUNT(*) as rcNum,caseid,entity from rru_case_commet GROUP BY caseid,entity) t1 
+on t2.caseid=t1.caseid ;
+  </select>
+  
+</mapper>

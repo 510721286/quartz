@@ -1,0 +1,353 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.njzhaomi.quartz.yuejia.dao.CaseGratuityMapper" >
+  <resultMap id="BaseResultMap" type="com.njzhaomi.quartz.yuejia.povo.CaseGratuity" >
+    <id column="id" property="id" jdbcType="DECIMAL" />
+    <result column="author_money" property="authorMoney" jdbcType="INTEGER" />
+    <result column="author_openid" property="authorOpenid" jdbcType="VARCHAR" />
+    <result column="case_id" property="caseId" jdbcType="INTEGER" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="money" property="money" jdbcType="INTEGER" />
+    <result column="order_no" property="orderNo" jdbcType="VARCHAR" />
+    <result column="payer_openid" property="payerOpenid" jdbcType="VARCHAR" />
+    <result column="share_money" property="shareMoney" jdbcType="INTEGER" />
+    <result column="share_openid" property="shareOpenid" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="INTEGER" />
+    <result column="type" property="type" jdbcType="INTEGER" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="from_type" property="fromType" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, author_money, author_openid, case_id, create_time, money, order_no, payer_openid, 
+    share_money, share_openid, status, type, update_time, from_type
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.njzhaomi.quartz.yuejia.povo.CaseGratuityExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from rru_case_gratuity
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from rru_case_gratuity
+    where id = #{id,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from rru_case_gratuity
+    where id = #{id,jdbcType=DECIMAL}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.njzhaomi.quartz.yuejia.povo.CaseGratuityExample" >
+    delete from rru_case_gratuity
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.njzhaomi.quartz.yuejia.povo.CaseGratuity" >
+    insert into rru_case_gratuity (id, author_money, author_openid, 
+      case_id, create_time, money, 
+      order_no, payer_openid, share_money, 
+      share_openid, status, type, 
+      update_time, from_type)
+    values (#{id,jdbcType=DECIMAL}, #{authorMoney,jdbcType=INTEGER}, #{authorOpenid,jdbcType=VARCHAR}, 
+      #{caseId,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, #{money,jdbcType=INTEGER}, 
+      #{orderNo,jdbcType=VARCHAR}, #{payerOpenid,jdbcType=VARCHAR}, #{shareMoney,jdbcType=INTEGER}, 
+      #{shareOpenid,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER}, #{type,jdbcType=INTEGER}, 
+      #{updateTime,jdbcType=TIMESTAMP}, #{fromType,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.njzhaomi.quartz.yuejia.povo.CaseGratuity" >
+    insert into rru_case_gratuity
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="authorMoney != null" >
+        author_money,
+      </if>
+      <if test="authorOpenid != null" >
+        author_openid,
+      </if>
+      <if test="caseId != null" >
+        case_id,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="money != null" >
+        money,
+      </if>
+      <if test="orderNo != null" >
+        order_no,
+      </if>
+      <if test="payerOpenid != null" >
+        payer_openid,
+      </if>
+      <if test="shareMoney != null" >
+        share_money,
+      </if>
+      <if test="shareOpenid != null" >
+        share_openid,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="type != null" >
+        type,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+      <if test="fromType != null" >
+        from_type,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=DECIMAL},
+      </if>
+      <if test="authorMoney != null" >
+        #{authorMoney,jdbcType=INTEGER},
+      </if>
+      <if test="authorOpenid != null" >
+        #{authorOpenid,jdbcType=VARCHAR},
+      </if>
+      <if test="caseId != null" >
+        #{caseId,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="money != null" >
+        #{money,jdbcType=INTEGER},
+      </if>
+      <if test="orderNo != null" >
+        #{orderNo,jdbcType=VARCHAR},
+      </if>
+      <if test="payerOpenid != null" >
+        #{payerOpenid,jdbcType=VARCHAR},
+      </if>
+      <if test="shareMoney != null" >
+        #{shareMoney,jdbcType=INTEGER},
+      </if>
+      <if test="shareOpenid != null" >
+        #{shareOpenid,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=INTEGER},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="fromType != null" >
+        #{fromType,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.njzhaomi.quartz.yuejia.povo.CaseGratuityExample" resultType="java.lang.Integer" >
+    select count(*) from rru_case_gratuity
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update rru_case_gratuity
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=DECIMAL},
+      </if>
+      <if test="record.authorMoney != null" >
+        author_money = #{record.authorMoney,jdbcType=INTEGER},
+      </if>
+      <if test="record.authorOpenid != null" >
+        author_openid = #{record.authorOpenid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.caseId != null" >
+        case_id = #{record.caseId,jdbcType=INTEGER},
+      </if>
+      <if test="record.createTime != null" >
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.money != null" >
+        money = #{record.money,jdbcType=INTEGER},
+      </if>
+      <if test="record.orderNo != null" >
+        order_no = #{record.orderNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.payerOpenid != null" >
+        payer_openid = #{record.payerOpenid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.shareMoney != null" >
+        share_money = #{record.shareMoney,jdbcType=INTEGER},
+      </if>
+      <if test="record.shareOpenid != null" >
+        share_openid = #{record.shareOpenid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.status != null" >
+        status = #{record.status,jdbcType=INTEGER},
+      </if>
+      <if test="record.type != null" >
+        type = #{record.type,jdbcType=INTEGER},
+      </if>
+      <if test="record.updateTime != null" >
+        update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.fromType != null" >
+        from_type = #{record.fromType,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update rru_case_gratuity
+    set id = #{record.id,jdbcType=DECIMAL},
+      author_money = #{record.authorMoney,jdbcType=INTEGER},
+      author_openid = #{record.authorOpenid,jdbcType=VARCHAR},
+      case_id = #{record.caseId,jdbcType=INTEGER},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      money = #{record.money,jdbcType=INTEGER},
+      order_no = #{record.orderNo,jdbcType=VARCHAR},
+      payer_openid = #{record.payerOpenid,jdbcType=VARCHAR},
+      share_money = #{record.shareMoney,jdbcType=INTEGER},
+      share_openid = #{record.shareOpenid,jdbcType=VARCHAR},
+      status = #{record.status,jdbcType=INTEGER},
+      type = #{record.type,jdbcType=INTEGER},
+      update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      from_type = #{record.fromType,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.njzhaomi.quartz.yuejia.povo.CaseGratuity" >
+    update rru_case_gratuity
+    <set >
+      <if test="authorMoney != null" >
+        author_money = #{authorMoney,jdbcType=INTEGER},
+      </if>
+      <if test="authorOpenid != null" >
+        author_openid = #{authorOpenid,jdbcType=VARCHAR},
+      </if>
+      <if test="caseId != null" >
+        case_id = #{caseId,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="money != null" >
+        money = #{money,jdbcType=INTEGER},
+      </if>
+      <if test="orderNo != null" >
+        order_no = #{orderNo,jdbcType=VARCHAR},
+      </if>
+      <if test="payerOpenid != null" >
+        payer_openid = #{payerOpenid,jdbcType=VARCHAR},
+      </if>
+      <if test="shareMoney != null" >
+        share_money = #{shareMoney,jdbcType=INTEGER},
+      </if>
+      <if test="shareOpenid != null" >
+        share_openid = #{shareOpenid,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="type != null" >
+        type = #{type,jdbcType=INTEGER},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="fromType != null" >
+        from_type = #{fromType,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.njzhaomi.quartz.yuejia.povo.CaseGratuity" >
+    update rru_case_gratuity
+    set author_money = #{authorMoney,jdbcType=INTEGER},
+      author_openid = #{authorOpenid,jdbcType=VARCHAR},
+      case_id = #{caseId,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      money = #{money,jdbcType=INTEGER},
+      order_no = #{orderNo,jdbcType=VARCHAR},
+      payer_openid = #{payerOpenid,jdbcType=VARCHAR},
+      share_money = #{shareMoney,jdbcType=INTEGER},
+      share_openid = #{shareOpenid,jdbcType=VARCHAR},
+      status = #{status,jdbcType=INTEGER},
+      type = #{type,jdbcType=INTEGER},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      from_type = #{fromType,jdbcType=INTEGER}
+    where id = #{id,jdbcType=DECIMAL}
+  </update>
+</mapper>

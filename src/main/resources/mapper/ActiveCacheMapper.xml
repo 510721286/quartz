@@ -1,0 +1,1207 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.njzhaomi.quartz.yuejia.dao.ActiveCacheMapper" >
+  <resultMap id="BaseResultMap" type="com.njzhaomi.quartz.yuejia.povo.ActiveCache" >
+    <id column="id" property="id" jdbcType="DECIMAL" />
+    <result column="totalCnt" property="totalcnt" jdbcType="VARCHAR" />
+    <result column="totalSalesCnt" property="totalsalescnt" jdbcType="VARCHAR" />
+    <result column="totalMoney" property="totalmoney" jdbcType="VARCHAR" />
+    <result column="totalReadCnt" property="totalreadcnt" jdbcType="VARCHAR" />
+    <result column="totalShareCnt" property="totalsharecnt" jdbcType="VARCHAR" />
+    <result column="totalCostMoney" property="totalcostmoney" jdbcType="VARCHAR" />
+    <result column="orderCnt" property="ordercnt" jdbcType="VARCHAR" />
+    <result column="totalSales" property="totalsales" jdbcType="VARCHAR" />
+    <result column="totalRebate" property="totalrebate" jdbcType="VARCHAR" />
+    <result column="dyNum" property="dynum" jdbcType="VARCHAR" />
+    <result column="totalVips" property="totalvips" jdbcType="VARCHAR" />
+    <result column="totalVipSales" property="totalvipsales" jdbcType="VARCHAR" />
+    <result column="allMoney" property="allmoney" jdbcType="VARCHAR" />
+    <result column="totalWithdrawal" property="totalwithdrawal" jdbcType="VARCHAR" />
+    <result column="totalEmployeeCount" property="totalemployeecount" jdbcType="VARCHAR" />
+    <result column="totalUserCount" property="totalusercount" jdbcType="VARCHAR" />
+    <result column="totalFirstMembership" property="totalfirstmembership" jdbcType="VARCHAR" />
+    <result column="totalSecondMembership" property="totalsecondmembership" jdbcType="VARCHAR" />
+    <result column="representSaleNum" property="representsalenum" jdbcType="VARCHAR" />
+    <result column="totalBuyers" property="totalbuyers" jdbcType="VARCHAR" />
+    <result column="oneBuyers" property="onebuyers" jdbcType="VARCHAR" />
+    <result column="employeeSales" property="employeesales" jdbcType="VARCHAR" />
+    <result column="productBrowse" property="productbrowse" jdbcType="VARCHAR" />
+    <result column="createTime" property="createtime" jdbcType="TIMESTAMP" />
+    <result column="startTime" property="starttime" jdbcType="DATE" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, totalCnt, totalSalesCnt, totalMoney, totalReadCnt, totalShareCnt, totalCostMoney, 
+    orderCnt, totalSales, totalRebate, dyNum, totalVips, totalVipSales, allMoney, totalWithdrawal, 
+    totalEmployeeCount, totalUserCount, totalFirstMembership, totalSecondMembership, 
+    representSaleNum, totalBuyers, oneBuyers, employeeSales, productBrowse, createTime, 
+    startTime
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.njzhaomi.quartz.yuejia.povo.ActiveCacheExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from active_cache
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from active_cache
+    where id = #{id,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from active_cache
+    where id = #{id,jdbcType=DECIMAL}
+  </delete>
+  
+  <delete id="deleteAll" >
+    delete from active_cache
+  </delete>
+  
+  <delete id="deleteByExample" parameterType="com.njzhaomi.quartz.yuejia.povo.ActiveCacheExample" >
+    delete from active_cache
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.njzhaomi.quartz.yuejia.povo.ActiveCache" >
+    insert into active_cache (id, totalCnt, totalSalesCnt, 
+      totalMoney, totalReadCnt, totalShareCnt, 
+      totalCostMoney, orderCnt, totalSales, 
+      totalRebate, dyNum, totalVips, 
+      totalVipSales, allMoney, totalWithdrawal, 
+      totalEmployeeCount, totalUserCount, totalFirstMembership, 
+      totalSecondMembership, representSaleNum, 
+      totalBuyers, oneBuyers, employeeSales, 
+      productBrowse, createTime, startTime
+      )
+    values (#{id,jdbcType=DECIMAL}, #{totalcnt,jdbcType=VARCHAR}, #{totalsalescnt,jdbcType=VARCHAR}, 
+      #{totalmoney,jdbcType=VARCHAR}, #{totalreadcnt,jdbcType=VARCHAR}, #{totalsharecnt,jdbcType=VARCHAR}, 
+      #{totalcostmoney,jdbcType=VARCHAR}, #{ordercnt,jdbcType=VARCHAR}, #{totalsales,jdbcType=VARCHAR}, 
+      #{totalrebate,jdbcType=VARCHAR}, #{dynum,jdbcType=VARCHAR}, #{totalvips,jdbcType=VARCHAR}, 
+      #{totalvipsales,jdbcType=VARCHAR}, #{allmoney,jdbcType=VARCHAR}, #{totalwithdrawal,jdbcType=VARCHAR}, 
+      #{totalemployeecount,jdbcType=VARCHAR}, #{totalusercount,jdbcType=VARCHAR}, #{totalfirstmembership,jdbcType=VARCHAR}, 
+      #{totalsecondmembership,jdbcType=VARCHAR}, #{representsalenum,jdbcType=VARCHAR}, 
+      #{totalbuyers,jdbcType=VARCHAR}, #{onebuyers,jdbcType=VARCHAR}, #{employeesales,jdbcType=VARCHAR}, 
+      #{productbrowse,jdbcType=VARCHAR}, #{createtime,jdbcType=TIMESTAMP}, #{starttime,jdbcType=DATE}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.njzhaomi.quartz.yuejia.povo.ActiveCache" >
+    insert into active_cache
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="totalcnt != null" >
+        totalCnt,
+      </if>
+      <if test="totalsalescnt != null" >
+        totalSalesCnt,
+      </if>
+      <if test="totalmoney != null" >
+        totalMoney,
+      </if>
+      <if test="totalreadcnt != null" >
+        totalReadCnt,
+      </if>
+      <if test="totalsharecnt != null" >
+        totalShareCnt,
+      </if>
+      <if test="totalcostmoney != null" >
+        totalCostMoney,
+      </if>
+      <if test="ordercnt != null" >
+        orderCnt,
+      </if>
+      <if test="totalsales != null" >
+        totalSales,
+      </if>
+      <if test="totalrebate != null" >
+        totalRebate,
+      </if>
+      <if test="dynum != null" >
+        dyNum,
+      </if>
+      <if test="totalvips != null" >
+        totalVips,
+      </if>
+      <if test="totalvipsales != null" >
+        totalVipSales,
+      </if>
+      <if test="allmoney != null" >
+        allMoney,
+      </if>
+      <if test="totalwithdrawal != null" >
+        totalWithdrawal,
+      </if>
+      <if test="totalemployeecount != null" >
+        totalEmployeeCount,
+      </if>
+      <if test="totalusercount != null" >
+        totalUserCount,
+      </if>
+      <if test="totalfirstmembership != null" >
+        totalFirstMembership,
+      </if>
+      <if test="totalsecondmembership != null" >
+        totalSecondMembership,
+      </if>
+      <if test="representsalenum != null" >
+        representSaleNum,
+      </if>
+      <if test="totalbuyers != null" >
+        totalBuyers,
+      </if>
+      <if test="onebuyers != null" >
+        oneBuyers,
+      </if>
+      <if test="employeesales != null" >
+        employeeSales,
+      </if>
+      <if test="productbrowse != null" >
+        productBrowse,
+      </if>
+      <if test="createtime != null" >
+        createTime,
+      </if>
+      <if test="starttime != null" >
+        startTime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=DECIMAL},
+      </if>
+      <if test="totalcnt != null" >
+        #{totalcnt,jdbcType=VARCHAR},
+      </if>
+      <if test="totalsalescnt != null" >
+        #{totalsalescnt,jdbcType=VARCHAR},
+      </if>
+      <if test="totalmoney != null" >
+        #{totalmoney,jdbcType=VARCHAR},
+      </if>
+      <if test="totalreadcnt != null" >
+        #{totalreadcnt,jdbcType=VARCHAR},
+      </if>
+      <if test="totalsharecnt != null" >
+        #{totalsharecnt,jdbcType=VARCHAR},
+      </if>
+      <if test="totalcostmoney != null" >
+        #{totalcostmoney,jdbcType=VARCHAR},
+      </if>
+      <if test="ordercnt != null" >
+        #{ordercnt,jdbcType=VARCHAR},
+      </if>
+      <if test="totalsales != null" >
+        #{totalsales,jdbcType=VARCHAR},
+      </if>
+      <if test="totalrebate != null" >
+        #{totalrebate,jdbcType=VARCHAR},
+      </if>
+      <if test="dynum != null" >
+        #{dynum,jdbcType=VARCHAR},
+      </if>
+      <if test="totalvips != null" >
+        #{totalvips,jdbcType=VARCHAR},
+      </if>
+      <if test="totalvipsales != null" >
+        #{totalvipsales,jdbcType=VARCHAR},
+      </if>
+      <if test="allmoney != null" >
+        #{allmoney,jdbcType=VARCHAR},
+      </if>
+      <if test="totalwithdrawal != null" >
+        #{totalwithdrawal,jdbcType=VARCHAR},
+      </if>
+      <if test="totalemployeecount != null" >
+        #{totalemployeecount,jdbcType=VARCHAR},
+      </if>
+      <if test="totalusercount != null" >
+        #{totalusercount,jdbcType=VARCHAR},
+      </if>
+      <if test="totalfirstmembership != null" >
+        #{totalfirstmembership,jdbcType=VARCHAR},
+      </if>
+      <if test="totalsecondmembership != null" >
+        #{totalsecondmembership,jdbcType=VARCHAR},
+      </if>
+      <if test="representsalenum != null" >
+        #{representsalenum,jdbcType=VARCHAR},
+      </if>
+      <if test="totalbuyers != null" >
+        #{totalbuyers,jdbcType=VARCHAR},
+      </if>
+      <if test="onebuyers != null" >
+        #{onebuyers,jdbcType=VARCHAR},
+      </if>
+      <if test="employeesales != null" >
+        #{employeesales,jdbcType=VARCHAR},
+      </if>
+      <if test="productbrowse != null" >
+        #{productbrowse,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null" >
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="starttime != null" >
+        #{starttime,jdbcType=DATE},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.njzhaomi.quartz.yuejia.povo.ActiveCacheExample" resultType="java.lang.Integer" >
+    select count(*) from active_cache
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update active_cache
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=DECIMAL},
+      </if>
+      <if test="record.totalcnt != null" >
+        totalCnt = #{record.totalcnt,jdbcType=VARCHAR},
+      </if>
+      <if test="record.totalsalescnt != null" >
+        totalSalesCnt = #{record.totalsalescnt,jdbcType=VARCHAR},
+      </if>
+      <if test="record.totalmoney != null" >
+        totalMoney = #{record.totalmoney,jdbcType=VARCHAR},
+      </if>
+      <if test="record.totalreadcnt != null" >
+        totalReadCnt = #{record.totalreadcnt,jdbcType=VARCHAR},
+      </if>
+      <if test="record.totalsharecnt != null" >
+        totalShareCnt = #{record.totalsharecnt,jdbcType=VARCHAR},
+      </if>
+      <if test="record.totalcostmoney != null" >
+        totalCostMoney = #{record.totalcostmoney,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ordercnt != null" >
+        orderCnt = #{record.ordercnt,jdbcType=VARCHAR},
+      </if>
+      <if test="record.totalsales != null" >
+        totalSales = #{record.totalsales,jdbcType=VARCHAR},
+      </if>
+      <if test="record.totalrebate != null" >
+        totalRebate = #{record.totalrebate,jdbcType=VARCHAR},
+      </if>
+      <if test="record.dynum != null" >
+        dyNum = #{record.dynum,jdbcType=VARCHAR},
+      </if>
+      <if test="record.totalvips != null" >
+        totalVips = #{record.totalvips,jdbcType=VARCHAR},
+      </if>
+      <if test="record.totalvipsales != null" >
+        totalVipSales = #{record.totalvipsales,jdbcType=VARCHAR},
+      </if>
+      <if test="record.allmoney != null" >
+        allMoney = #{record.allmoney,jdbcType=VARCHAR},
+      </if>
+      <if test="record.totalwithdrawal != null" >
+        totalWithdrawal = #{record.totalwithdrawal,jdbcType=VARCHAR},
+      </if>
+      <if test="record.totalemployeecount != null" >
+        totalEmployeeCount = #{record.totalemployeecount,jdbcType=VARCHAR},
+      </if>
+      <if test="record.totalusercount != null" >
+        totalUserCount = #{record.totalusercount,jdbcType=VARCHAR},
+      </if>
+      <if test="record.totalfirstmembership != null" >
+        totalFirstMembership = #{record.totalfirstmembership,jdbcType=VARCHAR},
+      </if>
+      <if test="record.totalsecondmembership != null" >
+        totalSecondMembership = #{record.totalsecondmembership,jdbcType=VARCHAR},
+      </if>
+      <if test="record.representsalenum != null" >
+        representSaleNum = #{record.representsalenum,jdbcType=VARCHAR},
+      </if>
+      <if test="record.totalbuyers != null" >
+        totalBuyers = #{record.totalbuyers,jdbcType=VARCHAR},
+      </if>
+      <if test="record.onebuyers != null" >
+        oneBuyers = #{record.onebuyers,jdbcType=VARCHAR},
+      </if>
+      <if test="record.employeesales != null" >
+        employeeSales = #{record.employeesales,jdbcType=VARCHAR},
+      </if>
+      <if test="record.productbrowse != null" >
+        productBrowse = #{record.productbrowse,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createtime != null" >
+        createTime = #{record.createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.starttime != null" >
+        startTime = #{record.starttime,jdbcType=DATE},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update active_cache
+    set id = #{record.id,jdbcType=DECIMAL},
+      totalCnt = #{record.totalcnt,jdbcType=VARCHAR},
+      totalSalesCnt = #{record.totalsalescnt,jdbcType=VARCHAR},
+      totalMoney = #{record.totalmoney,jdbcType=VARCHAR},
+      totalReadCnt = #{record.totalreadcnt,jdbcType=VARCHAR},
+      totalShareCnt = #{record.totalsharecnt,jdbcType=VARCHAR},
+      totalCostMoney = #{record.totalcostmoney,jdbcType=VARCHAR},
+      orderCnt = #{record.ordercnt,jdbcType=VARCHAR},
+      totalSales = #{record.totalsales,jdbcType=VARCHAR},
+      totalRebate = #{record.totalrebate,jdbcType=VARCHAR},
+      dyNum = #{record.dynum,jdbcType=VARCHAR},
+      totalVips = #{record.totalvips,jdbcType=VARCHAR},
+      totalVipSales = #{record.totalvipsales,jdbcType=VARCHAR},
+      allMoney = #{record.allmoney,jdbcType=VARCHAR},
+      totalWithdrawal = #{record.totalwithdrawal,jdbcType=VARCHAR},
+      totalEmployeeCount = #{record.totalemployeecount,jdbcType=VARCHAR},
+      totalUserCount = #{record.totalusercount,jdbcType=VARCHAR},
+      totalFirstMembership = #{record.totalfirstmembership,jdbcType=VARCHAR},
+      totalSecondMembership = #{record.totalsecondmembership,jdbcType=VARCHAR},
+      representSaleNum = #{record.representsalenum,jdbcType=VARCHAR},
+      totalBuyers = #{record.totalbuyers,jdbcType=VARCHAR},
+      oneBuyers = #{record.onebuyers,jdbcType=VARCHAR},
+      employeeSales = #{record.employeesales,jdbcType=VARCHAR},
+      productBrowse = #{record.productbrowse,jdbcType=VARCHAR},
+      createTime = #{record.createtime,jdbcType=TIMESTAMP},
+      startTime = #{record.starttime,jdbcType=DATE}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.njzhaomi.quartz.yuejia.povo.ActiveCache" >
+    update active_cache
+    <set >
+      <if test="totalcnt != null" >
+        totalCnt = #{totalcnt,jdbcType=VARCHAR},
+      </if>
+      <if test="totalsalescnt != null" >
+        totalSalesCnt = #{totalsalescnt,jdbcType=VARCHAR},
+      </if>
+      <if test="totalmoney != null" >
+        totalMoney = #{totalmoney,jdbcType=VARCHAR},
+      </if>
+      <if test="totalreadcnt != null" >
+        totalReadCnt = #{totalreadcnt,jdbcType=VARCHAR},
+      </if>
+      <if test="totalsharecnt != null" >
+        totalShareCnt = #{totalsharecnt,jdbcType=VARCHAR},
+      </if>
+      <if test="totalcostmoney != null" >
+        totalCostMoney = #{totalcostmoney,jdbcType=VARCHAR},
+      </if>
+      <if test="ordercnt != null" >
+        orderCnt = #{ordercnt,jdbcType=VARCHAR},
+      </if>
+      <if test="totalsales != null" >
+        totalSales = #{totalsales,jdbcType=VARCHAR},
+      </if>
+      <if test="totalrebate != null" >
+        totalRebate = #{totalrebate,jdbcType=VARCHAR},
+      </if>
+      <if test="dynum != null" >
+        dyNum = #{dynum,jdbcType=VARCHAR},
+      </if>
+      <if test="totalvips != null" >
+        totalVips = #{totalvips,jdbcType=VARCHAR},
+      </if>
+      <if test="totalvipsales != null" >
+        totalVipSales = #{totalvipsales,jdbcType=VARCHAR},
+      </if>
+      <if test="allmoney != null" >
+        allMoney = #{allmoney,jdbcType=VARCHAR},
+      </if>
+      <if test="totalwithdrawal != null" >
+        totalWithdrawal = #{totalwithdrawal,jdbcType=VARCHAR},
+      </if>
+      <if test="totalemployeecount != null" >
+        totalEmployeeCount = #{totalemployeecount,jdbcType=VARCHAR},
+      </if>
+      <if test="totalusercount != null" >
+        totalUserCount = #{totalusercount,jdbcType=VARCHAR},
+      </if>
+      <if test="totalfirstmembership != null" >
+        totalFirstMembership = #{totalfirstmembership,jdbcType=VARCHAR},
+      </if>
+      <if test="totalsecondmembership != null" >
+        totalSecondMembership = #{totalsecondmembership,jdbcType=VARCHAR},
+      </if>
+      <if test="representsalenum != null" >
+        representSaleNum = #{representsalenum,jdbcType=VARCHAR},
+      </if>
+      <if test="totalbuyers != null" >
+        totalBuyers = #{totalbuyers,jdbcType=VARCHAR},
+      </if>
+      <if test="onebuyers != null" >
+        oneBuyers = #{onebuyers,jdbcType=VARCHAR},
+      </if>
+      <if test="employeesales != null" >
+        employeeSales = #{employeesales,jdbcType=VARCHAR},
+      </if>
+      <if test="productbrowse != null" >
+        productBrowse = #{productbrowse,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null" >
+        createTime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="starttime != null" >
+        startTime = #{starttime,jdbcType=DATE},
+      </if>
+    </set>
+    where id = #{id,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.njzhaomi.quartz.yuejia.povo.ActiveCache" >
+    update active_cache
+    set totalCnt = #{totalcnt,jdbcType=VARCHAR},
+      totalSalesCnt = #{totalsalescnt,jdbcType=VARCHAR},
+      totalMoney = #{totalmoney,jdbcType=VARCHAR},
+      totalReadCnt = #{totalreadcnt,jdbcType=VARCHAR},
+      totalShareCnt = #{totalsharecnt,jdbcType=VARCHAR},
+      totalCostMoney = #{totalcostmoney,jdbcType=VARCHAR},
+      orderCnt = #{ordercnt,jdbcType=VARCHAR},
+      totalSales = #{totalsales,jdbcType=VARCHAR},
+      totalRebate = #{totalrebate,jdbcType=VARCHAR},
+      dyNum = #{dynum,jdbcType=VARCHAR},
+      totalVips = #{totalvips,jdbcType=VARCHAR},
+      totalVipSales = #{totalvipsales,jdbcType=VARCHAR},
+      allMoney = #{allmoney,jdbcType=VARCHAR},
+      totalWithdrawal = #{totalwithdrawal,jdbcType=VARCHAR},
+      totalEmployeeCount = #{totalemployeecount,jdbcType=VARCHAR},
+      totalUserCount = #{totalusercount,jdbcType=VARCHAR},
+      totalFirstMembership = #{totalfirstmembership,jdbcType=VARCHAR},
+      totalSecondMembership = #{totalsecondmembership,jdbcType=VARCHAR},
+      representSaleNum = #{representsalenum,jdbcType=VARCHAR},
+      totalBuyers = #{totalbuyers,jdbcType=VARCHAR},
+      oneBuyers = #{onebuyers,jdbcType=VARCHAR},
+      employeeSales = #{employeesales,jdbcType=VARCHAR},
+      productBrowse = #{productbrowse,jdbcType=VARCHAR},
+      createTime = #{createtime,jdbcType=TIMESTAMP},
+      startTime = #{starttime,jdbcType=DATE}
+    where id = #{id,jdbcType=DECIMAL}
+  </update>
+  
+ <select id="activeData"  resultMap="BaseResultMap" >
+ SELECT
+	t1.*, t2.*, t3.*, t4.*, t5.*, t6.*, t7.*, t8.*, t9.*, t10.*, t11.*, t12.*, t13.*, t14.*, t15.*
+FROM
+	(
+		SELECT
+			count(1) totalCnt,
+
+		IF (
+			sum(w.order_total_price) IS NULL,
+			0,
+			sum(w.order_total_price) / 100
+		) totalMoney,
+		sum(w.product_count) totalSalesCnt
+	FROM
+		wx_order w,
+		case_product p,
+		rru_case c
+	WHERE
+		w.order_status IS NOT NULL
+	AND w.product_id = p.product_id
+	AND p.caseId = c.id
+	AND c.appid = 'wxfe568c3726085775'
+	AND c.casestatus IN (0, 1)
+	AND w.orderCreateTime >= #{d}
+	AND w.orderCreateTime &lt; #{tm}
+	) t1,
+	(
+		SELECT
+
+		IF (a1 IS NULL, 0, a1) totalReadCnt,
+
+	IF (a2 IS NULL, 0, a2) totalShareCnt,
+
+IF (a3 IS NULL, 0, a3 / 100) totalCostMoney
+FROM
+	(
+		SELECT
+			(
+				SELECT
+					COUNT(1)
+				FROM
+					rru_case_acct_item a,
+					rru_extend_case_acct b,
+					rru_case c
+				WHERE
+					a.pointtype = '1'
+				AND c.appid = 'wxfe568c3726085775'
+				AND b.caseid = c.id
+				AND a.accid = b.id
+				AND a.action_time >= #{d}
+				AND a.action_time &lt;= #{tm}
+			) a1,
+			(
+				SELECT
+					COUNT(1)
+				FROM
+					rru_case_acct_item a,
+					rru_extend_case_acct b,
+					rru_case c
+				WHERE
+					a.pointtype = '3'
+				AND c.appid = 'wxfe568c3726085775'
+				AND b.caseid = c.id
+				AND a.accid = b.id
+				AND a.action_time >= #{d}
+				AND a.action_time &lt;= #{tm}
+			) a2,
+			SUM(a.point) a3
+		FROM
+			rru_case_acct_item a,
+			rru_extend_case_acct b,
+			rru_case c
+		WHERE
+			a.accid = b.id
+		AND b.caseid = c.id
+		AND c.casestatus  &lt;&gt; - 9
+		AND c.appid = 'wxfe568c3726085775'
+		AND a.action_time >= #{d}
+		AND a.action_time &lt;= #{tm}
+	) t0
+	) t2,
+	(
+		SELECT
+			count(1) productBrowse
+		FROM
+			wx_order wr
+		WHERE
+			1 = 1
+		AND wr.orderCreateTime >= #{d}
+		AND wr.orderCreateTime &lt;= #{tm}
+	) t3,
+	(
+		SELECT
+			count(1) orderCnt,
+
+		IF (
+			(SUM(o.product_count)) IS NULL,
+			0,
+			SUM(o.product_count)
+		) representSaleNum,
+
+	IF (
+		(
+			sum(o.order_total_price) / 100
+		) IS NULL,
+		0,
+		sum(o.order_total_price) / 100
+	) totalVipSales,
+
+IF (
+	(
+		sum(o.order_total_price) / 100
+	) IS NULL,
+	0,
+	sum(o.order_total_price) / 100
+) totalSales,
+
+IF (
+	(
+		SUM(
+			o.product_count * p.rebate * dy_rate
+		) / 100
+	) IS NULL,
+	0,
+	SUM(
+		o.product_count * p.rebate * dy_rate
+	) / 100
+) totalRebate,
+ count(DISTINCT o.upOpenid) dyNum
+FROM
+	rru_case c,
+	case_product p,
+	wx_order o
+WHERE
+	c.id = p.caseId
+AND p.product_id = o.product_id
+AND o.upOpenid IS NOT NULL
+AND o.upOpenid &lt;&gt; ''
+AND c.appid = 'wxfe568c3726085775'
+AND c.casestatus IN (0, 1)
+AND o.order_status IS NOT NULL
+AND o.orderCreateTime >=#{d}
+AND o.orderCreateTime &lt; #{tm}
+	) t4,
+	(
+		SELECT
+			sum(rd.money) / 100 totalWithdrawal
+		FROM
+			redpack_record rd
+		WHERE
+			rd.appid = 'wxfe568c3726085775'
+		AND rd. TIMESTAMP >= #{d}
+		AND rd. TIMESTAMP &lt; #{tm}
+	) t5,
+	(
+		SELECT
+			count(1) totalVips,
+			sum(re.`status`)
+		FROM
+			rru_customer_rela re
+		WHERE
+			re.`status` = 1
+		AND re.appid = 'wxfe568c3726085775'
+		AND re.vipdate >=  #{d}
+		AND re.vipdate &lt; #{tm}
+	) t6,
+	(
+		SELECT
+
+		IF (
+			SUM(s.money) IS NULL,
+			0,
+			SUM(s.money)
+		) TotalVips,
+		count(1)
+	FROM
+		rru_direct_selling s,
+		rru_case a
+	WHERE
+		a.id = s.cid
+	AND a.appid = 'wxfe568c3726085775'
+	AND s.createtime >= #{d}
+	AND s.createtime &lt; #{tm}
+	) t7,
+	(
+		SELECT
+			count(1) totalFirstMembership,
+			ra.cid
+		FROM
+			rru_customer_rela ra
+		WHERE
+			ra.upid  &lt;&gt; 'wanxin'
+		AND ra.upid &lt;&gt; 'jszhaomi'
+		AND ra.appid = 'wxfe568c3726085775'
+		AND ra. STATUS = 1
+		AND ra.vipdate >= #{d}
+		AND ra.vipdate &lt; #{tm}
+	) t8,
+	(
+		SELECT
+			count(1) totalSecondMembership,
+			ra.cid
+		FROM
+			rru_customer_rela ra
+		LEFT JOIN rru_customer_rela ba ON ra.upid = ba.cid
+		WHERE
+			ra.upid &lt;&gt; 'wanxin'
+		AND ra.upid &lt;&gt; 'jszhaomi'
+		AND ba.upid &lt;&gt; 'wanxin'
+		AND ba.upid &lt;&gt; 'jszhaomi'
+		AND ra.appid = 'wxfe568c3726085775'
+		AND ra. STATUS = 1
+		AND ra.vipdate >= #{d}
+		AND ra.vipdate &lt; #{tm}
+	) t9,
+	(
+		SELECT
+			sum(rd.money) / 100 totalWithdrawal
+		FROM
+			redpack_record rd
+		WHERE
+			rd.appid = 'wxfe568c3726085775'
+		AND rd. TIMESTAMP >= #{d}
+		AND rd. TIMESTAMP &lt; #{tm}
+	) t10,
+	(
+		SELECT
+			count(ras.cid) totalUserCount
+		FROM
+			rru_customer_rela ras
+		WHERE
+			ras.appid = 'wxfe568c3726085775'
+		AND ras.cid IS NOT NULL
+		AND ras.vipdate >= #{d}
+		AND ras.vipdate &lt; #{tm}
+	) t11,
+	(
+		SELECT
+			count(1) totalEmployeeCount
+		FROM
+			t_wanxin_employeeinfo fos
+		WHERE
+			fos. STATUS = 0
+		AND fos.bindTime >= #{d}
+		AND fos.bindTime &lt; #{tm}
+	) t12,
+	(
+		SELECT
+			COUNT(1) totalBuyers
+		FROM
+			(
+				SELECT
+					count(wr.buyer_openid) AS count,
+					wr.buyer_openid
+				FROM
+					wx_order wr
+				INNER JOIN rru_case c ON wr.caseId = c.id
+				AND c.appid = 'wxfe568c3726085775'
+				WHERE
+					wr.order_id IS NOT NULL
+				AND wr.product_id IN (
+					SELECT
+						ct.product_id
+					FROM
+						case_product ct
+					WHERE
+						ct.caseId >= 473
+				)
+				AND wr.order_id IS NOT NULL
+				AND wr.product_id IN (
+					SELECT
+						ct.product_id
+					FROM
+						case_product ct
+					WHERE
+						ct.caseId >= 473
+				)
+				AND wr.orderCreateTime >= #{d}
+				AND wr.orderCreateTime &lt; #{tm}
+				GROUP BY
+					wr.buyer_openid
+			) li
+	) t13,
+	(
+		SELECT
+			COUNT(*) oneBuyers
+		FROM
+			(
+				SELECT
+					count(wr.buyer_openid) AS count,
+					wr.buyer_openid
+				FROM
+					wx_order wr
+				INNER JOIN rru_case c ON wr.caseId = c.id
+				AND c.appid = 'wxfe568c3726085775'
+				WHERE
+					wr.order_id IS NOT NULL
+				AND wr.product_id IN (
+					SELECT
+						ct.product_id
+					FROM
+						case_product ct
+					WHERE
+						ct.caseId >= 473
+				)
+				AND wr.orderCreateTime >= #{d}
+				AND wr.orderCreateTime &lt; #{tm}
+				GROUP BY
+					wr.buyer_openid
+				HAVING
+					count = 1
+			) sa
+	) t14,
+	(
+		SELECT
+			sum(wr.order_total_price) / 100 employeeSales
+		FROM
+			t_wanxin_employeeinfo fos
+		INNER JOIN wx_order wr ON wr.upOpenid = fos.openId
+		INNER JOIN rru_case c ON wr.caseId = c.id
+		AND c.appid = 'wxfe568c3726085775'
+		WHERE
+			wr.order_id IS NOT NULL
+		AND fos.`status` = 0
+		AND wr.orderCreateTime >= #{d}
+		AND wr.orderCreateTime &lt; #{tm}
+	) t15
+ 
+ </select> 
+  
+  <select id="scheduler" resultType = "map">
+  SELECT
+
+IF (
+	aa.orgLevelOne IS NULL,
+	'皖新传媒教育服务总公司',
+	aa.orgLevelOne
+) orgLevelOne,
+
+IF (cc.num IS NULL, 0, cc.num) AS num,
+ SUM(aa.order_total_price) / 100 totalprice,
+ SUM(bb.vipCount) vipCount,
+
+IF (ss.total IS NULL, 0, ss.total) totalReadCount,
+ ROUND(
+	(
+
+		IF (
+			SUM(aa.order_total_price) / 100 IS NULL,
+			0,
+			SUM(aa.order_total_price) / 100
+		) + SUM(bb.vipCount) * 3 +
+		IF (
+			ss.total / 10 IS NULL,
+			0,
+			ss.total / 10
+		)
+	),
+	2
+) AS credits,
+ aa.orgLevelOneId
+FROM
+	(
+		SELECT
+			id,
+			NAME
+		FROM
+			t_wanxin_organization
+		WHERE
+			LEVEL = 1
+		AND id IN (6, 11)
+	) tt
+LEFT JOIN (
+	SELECT
+		t.orgLevelOne AS orgLevelOne,
+		t.orgLevelOneId AS orgLevelOneId,
+		SUM(w.order_total_price) AS order_total_price
+	FROM
+		t_wanxin_employeeinfo t
+	INNER JOIN wx_order w ON t.openId = w.upOpenid
+	AND w.order_status &lt;&gt; 21
+	AND w.order_id IS NOT NULL
+	AND w.orderCreateTime >= '2016-10-8 '
+	AND w.orderCreateTime &lt;= date_sub(curdate(),interval -1 day)
+	GROUP BY
+		t.orgLevelOneId
+) aa ON tt.id = aa.orgLevelOneId
+LEFT JOIN (
+	SELECT
+		t.orgLevelOne AS orgLevelOne,
+		t.orgLevelOneId AS orgLevelOneId,
+		COUNT(r.id) AS vipCount
+	FROM
+		t_wanxin_employeeinfo t
+	JOIN rru_customer_rela r ON (
+		t.cid = r.upid
+		OR t.cid = r.upupid
+	)
+	WHERE
+		r.`status` = 1
+	AND r.cid IS NOT NULL
+	AND r.vipdate >= '2016-10-8'
+	AND r.vipdate &lt;= date_sub(curdate(),interval -1 day)
+	GROUP BY
+		t.orgLevelOneId
+) bb ON tt.id = bb.orgLevelOneId
+LEFT JOIN (
+	SELECT
+		COUNT(id) AS num,
+		t.`orgLevelOneId` AS companyId
+	FROM
+		t_wanxin_employeeinfo t
+	WHERE
+		`status` = 0
+	GROUP BY
+		orgLevelOneId
+) cc ON tt.id = cc.companyId
+LEFT JOIN (
+	SELECT
+		t.name AS 皖新传媒教育服务总公司,
+		t.id,
+		SUM(t.total) AS total
+	FROM
+		(
+			SELECT
+				twow.id,
+				twow. NAME,
+				SUM(mru.totalReadCount) AS total
+			FROM
+				t_wanxin_organization twow
+			LEFT JOIN t_wanxin_employeeinfo twe ON (twow.id = twe.orgLevelOneId)
+			LEFT JOIN mid_read_share_num mru ON (mru.cid = twe.cid)
+			WHERE
+				twow.`level` = 1
+			AND twow.id IN (6, 11)
+			AND mru.qdate >= '2016-10-8'
+			AND mru.qdate &lt;= date_sub(curdate(),interval -1 day)
+			GROUP BY
+				twow.id
+		) t
+) ss ON tt.id = ss.id
+UNION
+	 SELECT
+		tt. NAME AS orgLevelOne,
+
+	IF (cc.num IS NULL, 0, cc.num) AS num,
+	aa.order_total_price / 100 AS totalprice,
+	bb.vipCount,
+	kk.totalReadCount,
+	ROUND(
+		(
+
+			IF (
+				aa.order_total_price / 100 IS NULL,
+				0,
+				aa.order_total_price / 100
+			) + bb.vipCount * 3 +
+			IF (
+				kk.totalReadCount / 10 IS NULL,
+				0,
+				kk.totalReadCount / 10
+			)
+		) /
+		IF (cc.num IS NULL, 0, cc.num),
+		2
+	) AS credits,
+	aa.orgLevelOneId
+FROM
+	(
+		SELECT
+			id,
+			NAME
+		FROM
+			t_wanxin_organization
+		WHERE
+			LEVEL = 1
+		AND id NOT IN (10, 7, 5, 11, 6, 28, 30)
+	) tt
+LEFT JOIN (
+	SELECT
+		t.orgLevelOne AS orgLevelOne,
+		t.orgLevelOneId AS orgLevelOneId,
+		SUM(w.order_total_price) AS order_total_price
+	FROM
+		t_wanxin_employeeinfo t
+	INNER JOIN wx_order w ON t.openId = w.upOpenid
+	AND w.orderCreateTime >= '2016-10-8 '
+	AND w.orderCreateTime &lt;= date_sub(curdate(),interval -1 day)
+	AND w.order_id IS NOT NULL
+	AND w.order_status &lt;&gt; 21
+	GROUP BY
+		t.orgLevelOneId
+) aa ON tt.id = aa.orgLevelOneId
+LEFT JOIN (
+	SELECT
+		t.orgLevelOne AS orgLevelOne,
+		t.orgLevelOneId AS orgLevelOneId,
+		COUNT(r.id) AS vipCount
+	FROM
+		t_wanxin_employeeinfo t
+	JOIN rru_customer_rela r ON (
+		t.cid = r.upid
+		OR t.cid = r.upupid
+	)
+	WHERE
+		r.`status` = 1
+	AND r.cid IS NOT NULL
+	AND r.vipdate >= '2016-10-8'
+	AND r.vipdate &lt;= date_sub(curdate(),interval -1 day)
+	GROUP BY
+		t.orgLevelOneId
+) bb ON tt.id = bb.orgLevelOneId
+LEFT JOIN (
+	SELECT
+		COUNT(id) AS num,
+		t.`orgLevelOneId` AS companyId
+	FROM
+		t_wanxin_employeeinfo t
+	WHERE
+		`status` = 0
+	GROUP BY
+		orgLevelOneId
+) cc ON tt.id = cc.companyId
+LEFT JOIN (
+	SELECT
+		twow.id,
+		twow. NAME,
+		SUM(mru.totalReadCount) AS totalReadCount
+	FROM
+		t_wanxin_organization twow
+	LEFT JOIN t_wanxin_employeeinfo twe ON (twow.id = twe.orgLevelOneId)
+	LEFT JOIN mid_read_share_num mru ON (mru.cid = twe.cid)
+	WHERE
+		twow.`level` = 1
+	AND twow.id NOT IN (10, 7, 5, 11, 6, 28, 30)
+	AND mru.qdate >= '2016-10-8'
+	AND mru.qdate &lt;= date_sub(curdate(),interval -1 day)
+	GROUP BY
+		twow.id
+) kk ON tt.id = kk.id #ORDER BY
+#	credits DESC
+UNION ALL
+	(
+		SELECT
+
+		IF (
+			aa.orgLevelOne IS NULL,
+			'皖新传媒文化消费总公司',
+			aa.orgLevelOne
+		) orgLevelOne,
+
+	IF (cc.num IS NULL, 0, cc.num) AS num,
+	SUM(aa.order_total_price) / 100 totalprice,
+	SUM(bb.vipCount) vipCount,
+
+IF (os.total IS NULL, 0, os.total) totalReadCount,
+ ROUND(
+	(
+
+		IF (
+			SUM(aa.order_total_price) / 100 IS NULL,
+			0,
+			SUM(aa.order_total_price) / 100
+		) + SUM(bb.vipCount) * 3 +
+		IF (
+			os.total / 10 IS NULL,
+			0,
+			os.total / 10
+		)
+	),
+	2
+) AS credits,
+ aa.orgLevelOneId
+FROM
+	(
+		SELECT
+			id,
+			NAME
+		FROM
+			t_wanxin_organization
+		WHERE
+			LEVEL = 1
+		AND id IN (10, 7, 5)
+	) tt
+LEFT JOIN (
+	SELECT
+		t.orgLevelOne AS orgLevelOne,
+		t.orgLevelOneId AS orgLevelOneId,
+		SUM(w.order_total_price) AS order_total_price
+	FROM
+		t_wanxin_employeeinfo t
+	INNER JOIN wx_order w ON t.openId = w.upOpenid
+	AND w.order_status &lt;&gt; 21
+	AND w.order_id IS NOT NULL
+	AND w.orderCreateTime >= '2016-10-8 '
+	AND w.orderCreateTime &lt;= date_sub(curdate(),interval -1 day)
+	GROUP BY
+		t.orgLevelOneId
+) aa ON tt.id = aa.orgLevelOneId
+LEFT JOIN (
+	SELECT
+		t.orgLevelOne AS orgLevelOne,
+		t.orgLevelOneId AS orgLevelOneId,
+		COUNT(r.id) AS vipCount
+	FROM
+		t_wanxin_employeeinfo t
+	JOIN rru_customer_rela r ON (
+		t.cid = r.upid
+		OR t.cid = r.upupid
+	)
+	WHERE
+		r.`status` = 1
+	AND r.cid IS NOT NULL
+	AND r.vipdate >= '2016-10-8'
+	AND r.vipdate &lt;= date_sub(curdate(),interval -1 day)
+	GROUP BY
+		t.orgLevelOneId
+) bb ON tt.id = bb.orgLevelOneId
+LEFT JOIN (
+	SELECT
+		COUNT(id) AS num,
+		t.`orgLevelOneId` AS companyId
+	FROM
+		t_wanxin_employeeinfo t
+	WHERE
+		`status` = 0
+	GROUP BY
+		orgLevelOneId
+) cc ON tt.id = cc.companyId
+LEFT JOIN (
+	SELECT
+		t.`name` AS 皖新传媒文化消费总公司,
+		SUM(t.total) AS total,
+		t.id
+	FROM
+		(
+			SELECT
+				twow.id,
+				twow. NAME,
+				SUM(mru.totalReadCount) AS total
+			FROM
+				t_wanxin_organization twow
+			LEFT JOIN t_wanxin_employeeinfo twe ON (twow.id = twe.orgLevelOneId)
+			LEFT JOIN mid_read_share_num mru ON (mru.cid = twe.cid)
+			WHERE
+				twow.`level` = 1
+			AND twow.id IN (10, 7, 5)
+			GROUP BY
+				twow.id
+		) t
+) os ON tt.id = os.id
+	)
+  </select>
+  
+</mapper>
